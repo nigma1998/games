@@ -1,0 +1,9 @@
+body {
+ background-color: #000;
+}
+
+/* черный фон заголовка, белый цвет шрифта */
+h1 {
+ color: #fff;
+ background-color: #000;
+}
