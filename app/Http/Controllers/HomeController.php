@@ -24,11 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-    //  $newList = Cart::select(Cart::$allowedFields)->get();
-    //  $yonList = Cart::select(Cart::$yonListt)->get();
-        return view('home',
-        [//'newList' => $newList,
-      //    'lad' => 'ghjdthrf'
-      ]);
+    
+        return view('home');
     }
 }

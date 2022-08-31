@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\NpsController;
+use App\Http\Controllers\TimController;
 use App\Http\Controllers\Admin\GlobalController as AdminGlobalController;
 use App\Http\Controllers\Admin\NpsController as AdminNpsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -39,6 +41,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix' => 'gem', 'as' => 'gem.'], function(){
 Route::resource('gem', CartController::class);
+Route::resource('nonesk', NpsController::class);
+Route::resource('taim', TimController::class);
   });
 
 //Route::get('/gem', [CartController::class, 'index'])->name('gem');

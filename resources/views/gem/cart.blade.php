@@ -18,10 +18,7 @@
     <h1>Камера</h1>
 </div>
 <div class="content">
-
     <div class="block">
-
-
 
     <div>
         <img width="16" height="16" src="/Themes/images/refresh.png"/>
@@ -34,13 +31,97 @@
       @foreach($laf as $lafLis)
       @if($lafLis->price = $lafLis->price)
       <li class="padtop_s first-li">
-              <td> <img src="{{ Storage::url($lafLis->image_url)}}" width='68' height='68'> </td>
+              <td> <img class="icon" width="68" height="68" src="{{ Storage::url($lafLis->image_url)}}"/> </td>
           <div class="row">
               <div>
                       <span class="patienttitle">{{ $lafLis->product_name }}</span>
 <span class="minor smallfont"></span>                    </div>
               <div>
 
+@php
+$timeh = date('H', strtotime($lafLis->updated_at));
+$timei = date('i', strtotime($lafLis->updated_at));
+$times = date('s', strtotime($lafLis->updated_at));
+
+
+$s = $times;
+$x = $timeh;
+$r = $timei + $lafLis->price;
+$m = date("m", strtotime($lafLis->updated_at));
+$e = date("d", strtotime($lafLis->updated_at));
+$i = date("Y", strtotime($lafLis->updated_at));
+
+$endOfDiscount = mktime($x,$r,$s,$m,$e,$i);
+$now = time(); // текущее время
+$secondsRemaining = $endOfDiscount - $now; // оставшееся время
+
+$minut;
+$hour;
+$day;
+
+$daysRemaining = floor($secondsRemaining / $day); //дни, до даты
+$secondsRemaining -= ($daysRemaining * $day);     //обновляем переменную
+
+$hoursRemaining = floor($secondsRemaining / $hour); // часы до даты
+$secondsRemaining -= ($hoursRemaining * $hour);     //обновляем переменную
+
+$minutesRemaining = floor($secondsRemaining / $minut); //минуты до даты
+$secondsRemaining -= ($minutesRemaining * $minut);     //обновляем переменную
+@endphp
+
+@if ($daysRemaining > -1)
+  <div class='blog'>До окончания {{$daysRemaining}} д, {{$hoursRemaining}} ч, {{$minutesRemaining}} минут, {{$secondsRemaining}} секунда</div>
+
+@php
+$tameh = date('H', strtotime($lafLis->dat));
+$tamei = date('i', strtotime($lafLis->dat));
+$tames = date('s', strtotime($lafLis->dat));
+
+
+
+
+$sar = $tames;
+$xix = $tameh;
+$rar = $tamei + $lafLis->button;
+$mab = date("m", strtotime($lafLis->dat));
+$ey = date("d", strtotime($lafLis->dat));
+$ir = date("Y", strtotime($lafLis->dat));
+
+  $end = mktime($xix,$rar,$sar,$mab,$ey,$ir);
+  $naw = time(); // текущее время
+  $ref = $end - $naw; // оставшееся время
+
+  $minut;
+  $hour;
+  $day;
+
+  $days = floor($ref / $day); //дни, до даты
+  $ref -= ($days * $day);     //обновляем переменную
+
+  $hours = floor($ref / $hour); // часы до даты
+  $ref -= ($hours * $hour);     //обновляем переменную
+
+  $minutes = floor($ref / $minut); //минуты до даты
+  $ref -= ($minutes * $minut);     //обновляем переменную
+@endphp
+  @if ($days > -1)
+  <div class='blog'>До следующего опроса {{$days}} д, {{$hours}} ч, {{$minutes}} минут, {{$ref}} секунда</div>
+
+
+  @else{
+
+    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Сократить время</a>
+
+  }
+
+@endif
+
+
+@else
+
+
+    <a href="{{ route('gem.nonesk.edit', ['nonesk'=> $lafLis->id]) }}">Завершить допрос</a>
+@endif
 <!--здесь должно отображаться таймер до следующего сокращение времени-->
               </div>
           </div>

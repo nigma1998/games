@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Images;
 use App\Models\Schablon;
+use App\Helper\TimeHelper;
 
 class CartController extends Controller
 {
@@ -16,9 +18,15 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Cart $gem)
     {
 
+
+
+      $TimeHelper = new TimeHelper();
+      $minut = TimeHelper::SECONDS_PER_MINUTE;
+      $hour = TimeHelper::SECONDS_PER_HOUR;
+      $day = TimeHelper::SECONDS_PER_DAY;
       $schablon = Schablon::select(Schablon::$yonListt)->get();
 
       $user = Auth::user()->name;
@@ -27,7 +35,12 @@ class CartController extends Controller
         return view('gem.cart', [
           'laf' => $userList,
           'has' => $schablon,
+          'minut' => $minut,
+          'hour' => $hour,
+          'day' => $day,
         ]);
+
+
     }
 
     /**
@@ -88,7 +101,8 @@ class CartController extends Controller
     //  dd($sList);
       return view('gem.edit',[
           'lis' => $gem,
-          'npsListt' => $sList
+          'npsListt' => $sList,
+
       ]);
     }
 
@@ -101,30 +115,24 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $gem)
     {
+    //  dd(Cart::find($id));
     //  $sList = Images::select(Images::$allowedFields)->get();
 
       $request->validate([
         'product_name' => ['required', 'string']
       ]);
 
+      $gem->dat = $timestamp = date("Y-m-d H:i:s");
 
+      $gem = $gem->fill($request->only(['product_name', 'price', 'exxp', 'image_url', 'dat', 'button']))->save();
 
-
-    //  $gem = $request->except(['product_name', 'price', 'exxp', 'image_url']);
-
-    //  $gem = $gem->fill($request->only(['product_name', 'price', 'exxp', 'image_url']));
-
-    $gem->product_name = $request->input('product_name');
-
-
-dd($gem);
-      $gem->save();
+    //  dd($gem);
 
       if($gem){
-        return redirect()->route('gem.gem.index')->with('success', 'nps успешно отредактирован');
+        return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру');
       }
 
-      return back()->withInput()->with('error', 'Не удолось создать nps');
+      return back()->withInput()->with('error', 'Заключённый сбежал');
     }
 
     /**
