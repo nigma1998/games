@@ -49,7 +49,7 @@
 
                 </div>
                 <span>Опыт:</span>
-                <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lis->exxp}}</span><span class="minor">, </span>
+                <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lis->exp}}</span><span class="minor">, </span>
 
 
             </div>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="exxp" id="exxp" value="">
+                        <input type="hidden" class="form-control" name="exp" id="exp" value="">
                         </div>
 
                         <button class="btn btn-primary">Отправить на этап</button>

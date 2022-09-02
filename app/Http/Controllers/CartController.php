@@ -121,13 +121,22 @@ class CartController extends Controller
         'product_name' => ['required', 'string']
       ]);
 
+
+
+
       $gem->dat = $timestamp = date("Y-m-d H:i:s");
 
-      $gem = $gem->fill($request->only(['product_name', 'total_time', 'exxp', 'image_url', 'dat', 'button']))->save();
+      $gem = $gem->fill($request->only(['product_name', 'total_time', 'exp', 'image_url', 'dat', 'button']))->save();
 
+      // прибавление опыта игроку
+      $ex = Auth::user()->exp; // общее количество опыта у игрока
+      $accrual = request()->input('exp'); // количество получаемого опыта
+      $addition = $ex + $accrual;
+      $result = $addition;
 
-
-    //  $gem = Users::update('exp')->VALUES('exxp')->save();
+      $user = Users::findOrFail(Auth::user()->id);
+      $user->exp = $result;
+      $user->save();
 
       if($gem){
         return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру');

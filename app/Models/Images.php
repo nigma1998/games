@@ -12,9 +12,9 @@ class Images extends Model
 
 
 
-    public static array $allowedFields = ['id', 'image_url', 'path', 'total_time', 'button', 'exxp', 'product_name' ];
+    public static array $allowedFields = ['id', 'image_url', 'path', 'total_time', 'button', 'exp', 'product_name' ];
 
     protected $fillable = [
-      'product_name', 'total_time', 'exxp', 'image_url'
+      'product_name', 'total_time', 'exp', 'image_url'
     ];
 }

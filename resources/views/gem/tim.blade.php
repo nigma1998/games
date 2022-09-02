@@ -49,7 +49,7 @@
 
                 </div>
                 <span>Опыт:</span>
-                <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$buton->exxp}}</span><span class="minor">, </span>
+                <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$buton->exp}}</span><span class="minor">, </span>
 
 
             </div>

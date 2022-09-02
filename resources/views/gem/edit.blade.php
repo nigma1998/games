@@ -61,7 +61,7 @@
         <span class="ylwtitle">{{$lafLis->total_time}}.</span>
     </div>
     <span>Опыт:</span>
-    <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lafLis->exxp}}</span><span class="minor">, </span>
+    <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lafLis->exp}}</span><span class="minor">, </span>
     <span>Доход:</span>
     <img width="16" height="16" src="/Themes/images/coins2.png"/>
     <span class="money">550</span><span class="minor">, </span>
@@ -81,7 +81,7 @@
             </div>
             <div class="form-group">
 
-            <input type="hidden" class="form-control" name="exxp" id="exxp" value="{{$lafLis->exxp}}">
+            <input type="hidden" class="form-control" name="exp" id="exp" value="{{$lafLis->exp}}">
             </div>
             <div class="form-group">
 
