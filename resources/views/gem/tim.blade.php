@@ -22,7 +22,7 @@
 <div class="block">
     <div>
 
-        <h3>Ожидающие подозреваемые</h3>
+        <h3>Комната подозреваемого</h3>
 
     </div>
     <a href="{{ route('admin.nps.index') }}">Вернуться обратно</a>
@@ -54,11 +54,11 @@
 
             </div>
                     @php
-
-                    $tare = 5;
-                    $xy = $buton->price;
-                    $arrr = $xy - $tare;
-                    $aq = $arrr;
+                    // здесь реализуеться сокращение таймера
+                    $tare = 5; // условное значени позже будет переписанно на значение из бд
+                    $xy = $buton->total_time; // оставшее время с таймера
+                    $arrr = $xy - $tare; // вычитаем из общего время нужную сумму
+                    $aq = $arrr; // результат присваиваем этой переменной и вносим в бд
 
                     $timestamp = date("Y-m-d H:i:s");
 
@@ -69,7 +69,7 @@
 
                         <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="price" id="price" value="{{$aq}}">
+                        <input type="hidden" class="form-control" name="total_time" id="total_time" value="{{$aq}}">
                         </div>
 
 

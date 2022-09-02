@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
+use App\Models\Users;
 use App\Models\Images;
 use App\Models\Schablon;
 use App\Helper\TimeHelper;
@@ -22,15 +23,15 @@ class CartController extends Controller
     {
 
 
-
+      // данные взяты с файла хелпер
       $TimeHelper = new TimeHelper();
       $minut = TimeHelper::SECONDS_PER_MINUTE;
       $hour = TimeHelper::SECONDS_PER_HOUR;
       $day = TimeHelper::SECONDS_PER_DAY;
-      $schablon = Schablon::select(Schablon::$yonListt)->get();
+      $schablon = Schablon::select(Schablon::$yonListt)->get(); // файл для шаблона
 
       $user = Auth::user()->name;
-    //  $npsList = Cart::select(Cart::$yonListt)->where($user, '=', 'user')->get();
+
       $userList =  DB::table('cart')->where('user', $user)->get();
         return view('gem.cart', [
           'laf' => $userList,
@@ -115,8 +116,6 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $gem)
     {
-    //  dd(Cart::find($id));
-    //  $sList = Images::select(Images::$allowedFields)->get();
 
       $request->validate([
         'product_name' => ['required', 'string']
@@ -124,9 +123,11 @@ class CartController extends Controller
 
       $gem->dat = $timestamp = date("Y-m-d H:i:s");
 
-      $gem = $gem->fill($request->only(['product_name', 'price', 'exxp', 'image_url', 'dat', 'button']))->save();
+      $gem = $gem->fill($request->only(['product_name', 'total_time', 'exxp', 'image_url', 'dat', 'button']))->save();
 
-    //  dd($gem);
+
+
+    //  $gem = Users::update('exp')->VALUES('exxp')->save();
 
       if($gem){
         return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру');
