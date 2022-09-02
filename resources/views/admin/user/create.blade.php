@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                         <label for="price">Время</label>
-                        <input type="text" class="form-control" name="total_time" id="total_time" value="{{ old('total_time') }}">
+                        <input type="text" class="form-control" name="price" id="price" value="{{ old('price') }}">
                         </div>
                         <div class="form-group">
                         <label for="exxp">Опыт</label>

@@ -41,7 +41,7 @@
             <span class="smallfont minor">цена:</span>
             <img width="16" height="16" alt="o" src="/Themes/images/coins2.png" />
             <span class="smallfont minor">90</span>
-<!--Здесь реализуеться очищение таблицы-->
+
                         </div>
 
             <div class="smallfont minor" style="margin-left:52px;">
@@ -60,18 +60,18 @@
 
                         <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="product_name" id="product_name" value="">
+                        <input type="hidden" class="form-control" name="product_name" id="product_name" value="{{$lis->product_name}}">
                         </div>
                         <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="total_time" id="total_time" value="">
+                        <input type="hidden" class="form-control" name="price" id="price" value="">
                         </div>
                         <div class="form-group">
 
                         <input type="hidden" class="form-control" name="exxp" id="exxp" value="">
                         </div>
 
-                        <button class="btn btn-primary">Отправить на этап</button>
+                        <button class="btn btn-primary">Сохранить</button>
 
 
                       </form>

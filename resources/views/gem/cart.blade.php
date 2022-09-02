@@ -29,7 +29,7 @@
 
     <ul class="delim-list padtop_s">
       @foreach($laf as $lafLis)
-      @if($lafLis->total_time = $lafLis->total_time)
+      @if($lafLis->price = $lafLis->price)
       <li class="padtop_s first-li">
               <td> <img class="icon" width="68" height="68" src="{{ Storage::url($lafLis->image_url)}}"/> </td>
           <div class="row">
@@ -39,18 +39,17 @@
               <div>
 
 @php
-// реализация самого таймера
 $timeh = date('H', strtotime($lafLis->updated_at));
 $timei = date('i', strtotime($lafLis->updated_at));
 $times = date('s', strtotime($lafLis->updated_at));
 
-// за основу взята функция mktime
-$s = $times; // переменная секунда
-$x = $timeh;// переменная час
-$r = $timei + $lafLis->total_time;// переменная минуты здесь же мы прибовляем время которая храниться в бд
-$m = date("m", strtotime($lafLis->updated_at));// переменная месяц
-$e = date("d", strtotime($lafLis->updated_at));// переменная день
-$i = date("Y", strtotime($lafLis->updated_at));// переменная год
+
+$s = $times;
+$x = $timeh;
+$r = $timei + $lafLis->price;
+$m = date("m", strtotime($lafLis->updated_at));
+$e = date("d", strtotime($lafLis->updated_at));
+$i = date("Y", strtotime($lafLis->updated_at));
 
 $endOfDiscount = mktime($x,$r,$s,$m,$e,$i);
 $now = time(); // текущее время
@@ -109,11 +108,11 @@ $ir = date("Y", strtotime($lafLis->dat));
   <div class='blog'>До следующего опроса {{$days}} д, {{$hours}} ч, {{$minutes}} минут, {{$ref}} секунда</div>
 
 
-  @else
+  @else{
 
     <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Сократить время</a>
 
-
+  }
 
 @endif
 

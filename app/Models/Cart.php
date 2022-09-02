@@ -12,11 +12,11 @@ class Cart extends Model
 
 
 
-    public static array $allowedFields = ['id', 'image_url', 'total_time', 'exxp', 'product_name', 'user', 'dat', 'button' ];
+    public static array $allowedFields = ['id', 'image_url', 'price', 'exxp', 'product_name', 'user', 'dat', 'button' ];
 
     public static  array $yonListt = ['name'];
 
     protected $fillable = [
-      'user', 'product_name', 'total_time', 'exxp', 'image_url', 'dat', 'button'
+      'user', 'product_name', 'price', 'exxp', 'image_url', 'dat', 'button'
     ];
 }

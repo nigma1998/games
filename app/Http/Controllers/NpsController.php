@@ -76,12 +76,11 @@ class NpsController extends Controller
      */
     public function update(Request $request, Cart $nonesk)
     {
-      // здесь реализована очищение таблицы игрока
       $request->validate([
-
+        'product_name' => ['required', 'string']
       ]);
 
-      $nonesk = $nonesk->fill($request->only(['product_name', 'total_time', 'exxp', 'image_url']))->save();
+      $nonesk = $nonesk->fill($request->only(['product_name', 'price', 'exxp', 'image_url']))->save();
 
     //  dd($gem);
 
