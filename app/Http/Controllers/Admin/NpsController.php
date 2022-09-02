@@ -58,7 +58,7 @@ class NpsController extends Controller
       );
       }
 
-      $data = $request->only(['product_name', 'price', 'exxp', 'image_url']);
+      $data = $request->only(['product_name', 'total_time', 'exxp', 'image_url']);
       $npsList = Images::create($data);
 
 
@@ -115,7 +115,7 @@ class NpsController extends Controller
         'product_name' => ['required', 'string']
       ]);
 
-      $data = $request->only(['product_name', 'price', 'exxp']);
+      $data = $request->only(['product_name', 'total_time', 'exxp']);
 
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);

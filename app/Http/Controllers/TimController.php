@@ -71,13 +71,14 @@ class TimController extends Controller
      */
     public function update(Request $request, Cart $taim)
     {
+      // здесь реализация таймера
       $request->validate([
 
       ]);
 
       $taim->dat = $timestamp = date("Y-m-d H:i:s");
 
-      $taim = $taim->fill($request->only([ 'price', 'dat']))->save();
+      $taim = $taim->fill($request->only([ 'total_time', 'dat']))->save();
 
     //  dd($gem);
 

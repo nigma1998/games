@@ -42,7 +42,7 @@
           @foreach($npsListt as $lafLis)
 
           <div class="card-body">
-            <form  method="post" action="{{ route('gem.gem.update', ['gem'=> $lis]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+            <form  method="post" action="{{ route('gem.gem.update', ['gem'=> $lis]) }}"  enctype="multipart/form-data">
               @csrf
               @method('put')
             <img class="icon" width="58" height="58" src="{{ Storage::url($lafLis->image_url)}}"/>
@@ -58,7 +58,7 @@
 <div class="smallfont minor" style="margin-left:52px;">
     <div>
         <span>Время прибывания:</span>
-        <span class="ylwtitle">{{$lafLis->price}}.</span>
+        <span class="ylwtitle">{{$lafLis->total_time}}.</span>
     </div>
     <span>Опыт:</span>
     <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lafLis->exxp}}</span><span class="minor">, </span>
@@ -67,6 +67,7 @@
     <span class="money">550</span><span class="minor">, </span>
 
 </div>
+<!-- здесь вывод перечень nps с последующим его записи в бд-->
         </li>
 
 
@@ -76,7 +77,7 @@
             </div>
             <div class="form-group">
 
-            <input type="hidden" class="form-control" name="price" id="price" value="{{$lafLis->price}}">
+            <input type="hidden" class="form-control" name="total_time" id="total_time" value="{{$lafLis->total_time}}">
             </div>
             <div class="form-group">
 

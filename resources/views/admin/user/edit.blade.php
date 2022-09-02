@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                         <label for="price">Время</label>
-                        <input type="text" class="form-control" name="price" id="price" value="{{ $npsLis->price }}">
+                        <input type="text" class="form-control" name="total_time" id="total_time" value="{{ $npsLis->total_time }}">
                         </div>
                         <div class="form-group">
                         <label for="image_url">Опыт</label>

@@ -32,8 +32,8 @@
         <input type="text" class="form-control" name="product_name" id="product_name" value="{{ $npsLis->product_name }}">
         </div>
         <div class="form-group">
-        <label for="price">Время</label>
-        <input type="text" class="form-control" name="price" id="price" value="{{ $npsLis->price }}">
+        <label for="total_time">Время</label>
+        <input type="text" class="form-control" name="total_time" id="total_time" value="{{ $npsLis->total_time }}">
         </div>
         <div class="form-group">
         <label for="image_url">Опыт</label>
@@ -51,43 +51,6 @@
 
       @empty
       @endempty
-
-
-<!--
-        <li class="padtop_s first-li ">
-            <img class="icon" width="48" height="48" src="/Themes/images/patients/patient41.png"/>
-            <div>
-                <a href="/Reception/Treat?repIndex=1&roomIndex=1&t=637959217048660575&page=1">Простуда</a><span class="smallfont minor">, </span>
-<span class="smallfont minor">(Оксана, 21 год)</span><span class="smallfont minor">, </span>
-<span class="smallfont minor">цена:</span>
-<img width="16" height="16" alt="o" src="/Themes/images/coins2.png" />
-<span class="smallfont minor">50</span>
-
-            </div>
-
-<div class="smallfont minor" style="margin-left:52px;">
-    <div>
-        <span>Лечение:</span>
-        <span class="ylwtitle">15 ч. 39 мин.</span>
-    </div>
-    <span>Опыт:</span>
-    <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money"> 200</span><span class="minor">, </span>
-    <span>Доход:</span>
-    <img width="16" height="16" src="/Themes/images/coins2.png"/>
-    <span class="money">238</span><span class="minor">, </span>
-    <span>Время до приема напитка:</span>
-    <img width="16" height="16" src="/Themes/images/pill.png"/>
-    <span class="money">2 мин.</span>
-
-    <div>
-        <span class="minor">Медикаменты:</span><img width="16" height="16" src="/Themes/images/potion.png"/><span>Жаропонижающее (1/1828374)</span><span>, </span><span>Антибиотики (1/4463)</span><span>, </span><span>Согревающее зелье (1/6876)</span>
-    </div>
-
-</div>
-
-        </li>
-
--->
 
     </ul>
     <div class="padtop_m">
