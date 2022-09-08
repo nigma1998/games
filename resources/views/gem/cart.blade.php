@@ -22,7 +22,7 @@
 
     <div>
         <img width="16" height="16" src="/Themes/images/refresh.png"/>
-        <a href="{{ url('/gem') }}">Обновить</a>
+        <a href="{{ route('gem.gem.index') }}">Обновить</a>
         <a href="{{ url('home') }}">Домой</a>
     </div>
     @include('inc.message')
@@ -111,7 +111,8 @@ $ir = date("Y", strtotime($lafLis->dat));
 
   @else
 
-    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Сократить время</a>
+    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Быстрый допрос</a></br>
+    <a href="{{ route('gem.proba.edit', ['proba'=> $lafLis->id]) }}">Личный допрос</a>
 
 
 

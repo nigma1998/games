@@ -28,7 +28,7 @@
               <td> <img src="{{ Storage::url($npsLis->image_url)}}" width='68' height='68'> </td>
 
               <td>{{$npsLis->total_time}}</td>
-              <td>{{$npsLis->exxp}}</td>
+              <td>{{$npsLis->exp}}</td>
               <td> <a href="{{ route('admin.nps.edit', ['np'=> $npsLis->id]) }}">редактирование</a></td>
             </tr>
 @empty

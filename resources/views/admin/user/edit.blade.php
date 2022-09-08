@@ -45,8 +45,8 @@
                         <input type="text" class="form-control" name="total_time" id="total_time" value="{{ $npsLis->total_time }}">
                         </div>
                         <div class="form-group">
-                        <label for="image_url">Опыт</label>
-                        <input type="text" class="form-control" name="exxp" id="exxp" value="{{$npsLis->exxp}}">
+                        <label for="exp">Опыт</label>
+                        <input type="text" class="form-control" name="exp" id="exp" value="{{ $npsLis->exp }}">
                         </div>
                         <div class="form-group">
                         <label for="image_url">Картинка</label>

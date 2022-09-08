@@ -1,5 +1,5 @@
 body {
-    background-color: #332f28; /*434344*/
+    background-color: #5a6479; /*434344*/
     max-width: 640px;
     font-family: Tahoma,Arial,sans-serif;
     margin: 0 auto;
@@ -581,7 +581,7 @@ img {
 
 div.caption {
     /*background-color: #006db7;*/
-    background: url(/Themes/images/letoheader.png) repeat-x scroll 0 0 #006db7;
+    background: url(/Themes/images/letoheader.png) repeat-x scroll 0 0 #38610B;
     /*background: url(/Themes/images/vesna_new.png) repeat-x scroll 0 0 #006db7;*/
     /*background: url("/Themes/images/winter.png") repeat-x scroll 0 0 #006db7;*/
     /*background: url(/Themes/images/autumn.png) repeat-x scroll 0 0 #006db7;*/
@@ -640,7 +640,7 @@ div.block {
     }
 
 div.content {
-    background-color: #ffecc7;
+    background-color: #E3CEF6;
 }
 
 .notify {

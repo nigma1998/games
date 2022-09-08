@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Images;
 
-class NpsController extends Controller
+class ProbaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class NpsController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -53,15 +53,13 @@ class NpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  Images $nonesk
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $nonesk)
+    public function edit(Cart $proba)
     {
-
-
-      return view('gem.naf',[
-          'lis' => $nonesk,
+      return view('gem.probapera',[
+          'interrogation' => $proba,
       ]);
     }
 
@@ -69,27 +67,26 @@ class NpsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Cart $nonesk
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $nonesk)
+    public function update(Request $request, Cart $proba)
     {
-      // здесь реализована очищение таблицы игрока
       $request->validate([
 
       ]);
+      $proba->id;
+      $proba->dat = $timestamp = date("Y-m-d H:i:s");
+    //  dd($proba->id);
+      $proba = $proba->fill($request->only(['identifier', 'chat_nps', 'dat']))->save();
 
-      $nonesk = $nonesk->fill($request->only(['product_name', 'total_time', 'exxp', 'image_url', 'identifier', 'chat_nps']))->save();
 
-    //  dd($gem);
+    if($proba){
+      return redirect()->route('gem.proba.edit',  ['proba'=> $proba]);
+   }
 
-      if($nonesk){
-        return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно отправлен на этап');
-     }
-
-      return back()->withInput()->with('error', 'Заключённый сбежал');
-    }
-
+    return back()->withInput()->with('error', 'Заключённый сбежал');
+  }
 
     /**
      * Remove the specified resource from storage.

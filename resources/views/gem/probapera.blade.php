@@ -22,66 +22,131 @@
 <div class="block">
     <div>
 
-        <h3>Ожидающие подозреваемые</h3>
+        <h3>Комната допроса</h3>
 
     </div>
-    <a href="{{ route('admin.nps.index') }}">Вернуться обратно</a>
+    <a href="{{ route('gem.gem.index') }}">Вернуться обратно</a>
     <ul class="delim-list padtop_s">
 
         <li class="padtop_s first-li ">
 
+
+
                     <div class="card-body">
-                      <form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lis]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+<img class="icon" width="58" height="58" src="{{ Storage::url($interrogation->image_url)}}"/>
+                      @if($interrogation->chat_nps = $interrogation->chat_nps)
 
-
-                        <img class="icon" width="58" height="58" src="{{ Storage::url($lis->image_url)}}"/>
-                        <div>
-                            <a href="/Reception/Treat?repIndex=1&roomIndex=1&t=637967616171613494&page=1">{{$lis->product_name}}</a><span class="smallfont minor">, </span>
-            <span class="smallfont minor">(Ксюша, 24 года)</span><span class="smallfont minor">, </span>
-            <span class="smallfont minor">цена:</span>
-            <img width="16" height="16" alt="o" src="/Themes/images/coins2.png" />
-            <span class="smallfont minor">90</span>
-<!--Здесь реализуеться очищение таблицы-->
-                        </div>
-
-            <div class="smallfont minor" style="margin-left:52px;">
-                <div>
-
-                </div>
-                <span>Опыт:</span>
-                <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lis->exp}}</span><span class="minor">, </span>
-
-
-            </div>
-
-
+                      @switch($interrogation->identifier)
+                      @case(1)
+                      <p>{{ $interrogation->chat_nps }}</p>
+                      <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
                         @csrf
                         @method('put')
+                        <div>
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="product_name" id="product_name" value="">
+                            <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="Я не виноват">
+                            </div>
+                            <div class="form-group">
+
+                            <input type="hidden" class="form-control" name="identifier" id="identifier" value="2">
+                            </div>
+                            <button class="btn btn-primary">не включай дурака</button>
+                            </form>
+                            <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
+                            <div>
+
+                            <div class="form-group">
+
+                            <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="Я не виноват">
+                            </div>
+                            <div class="form-group">
+
+                            <input type="hidden" class="form-control" name="identifier" id="identifier" value="3">
+                            </div>
+                            <button class="btn btn-primary">Ты в карцер захотел?</button>
+                            </form>
+                                @break
+
+                            @case(2)
+                            <p>{{ $interrogation->chat_nps }}</p>
+                            <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+                              @csrf
+                              @method('put')
+                              <div>
+
+                                  <div class="form-group">
+
+                                  <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="Выш сарказм здесь не уместен с этими словами протягивает вам листок">
+                                  </div>
+                                  <div class="form-group">
+
+                                  <input type="hidden" class="form-control" name="identifier" id="identifier" value="2">
+                                  </div>
+                                  <button class="btn btn-primary">Бедненький не виноват</button>
+                                  </form>
+                                  <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+                                  @csrf
+                                  @method('put')
+                                  <div>
+
+                                  <div class="form-group">
+
+                                  <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="получаеться что так у меня алиби">
+                                  </div>
+                                  <div class="form-group">
+
+                                  <input type="hidden" class="form-control" name="identifier" id="identifier" value="3">
+                                  </div>
+                                  <button class="btn btn-primary">То есть ты хочешь сказать что мы ршиблись?</button>
+                                  </form>
+                                @break
+
+                            @default
+                                Default case...
+                        @endswitch
+
                         </div>
-                        <div class="form-group">
-
-                        <input type="hidden" class="form-control" name="total_time" id="total_time" value="">
-                        </div>
-                        <div class="form-group">
-
-                        <input type="hidden" class="form-control" name="exp" id="exp" value="">
-                        </div>
-                        <div class="form-group">
-                        <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
-                        </div>
-                        <div class="form-group">
-
-                        <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
-                        </div>
-
-                        <button class="btn btn-primary">Отправить на этап</button>
 
 
-                      </form>
+
+                      @else
+                     <p>Здорова {{ Auth::user()->name }} вызывал?</p>
+                     <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+                       @csrf
+                       @method('put')
+
+                       <div class="form-group">
+
+                       <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="не понимаю о чём ты">
+                       </div>
+                       <div class="form-group">
+
+                       <input type="hidden" class="form-control" name="identifier" id="identifier" value="1">
+                       </div>
+
+                       <button class="btn btn-primary">Ты вкурсе что на тебя завели уголовное дело?</button>
+                     </form>
+                     <form  method="post" action="{{ route('gem.proba.update', ['proba'=> $interrogation]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+                       @csrf
+                       @method('put')
+
+                       <div class="form-group">
+                       <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
+                       </div>
+                       <div class="form-group">
+
+                       <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
+                       </div>
+                       <button class="btn btn-primary">Завершить допрос</button>
+                     </form>
+                     @endif
+
+
+
                       </li>
                     </ul>
 

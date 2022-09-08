@@ -39,12 +39,12 @@
                         <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') }}">
                         </div>
                         <div class="form-group">
-                        <label for="price">Время</label>
+                        <label for="total_time">Время</label>
                         <input type="text" class="form-control" name="total_time" id="total_time" value="{{ old('total_time') }}">
                         </div>
                         <div class="form-group">
-                        <label for="exxp">Опыт</label>
-                        <input type="text" class="form-control" name="exxp" id="exxp" value="{{ old('exxp') }}">
+                        <label for="exp">Опыт</label>
+                        <input type="text" class="form-control" name="exp" id="exp" value="{{ old('exp') }}">
                         </div>
                       <!--  <div class="form-group">
                         <label for="image_url">Изображение</label>
