@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
+use App\Models\Level;
 use App\Models\Users;
 use App\Models\Images;
 use App\Models\Schablon;
@@ -23,12 +24,14 @@ class CartController extends Controller
     {
 
 
+
       // данные взяты с файла хелпер
       $TimeHelper = new TimeHelper();
       $minut = TimeHelper::SECONDS_PER_MINUTE;
       $hour = TimeHelper::SECONDS_PER_HOUR;
       $day = TimeHelper::SECONDS_PER_DAY;
       $schablon = Schablon::select(Schablon::$yonListt)->get(); // файл для шаблона
+      $lvl = Level::select(Level::$fileTaibl)->get();
 
       $user = Auth::user()->name;
 
@@ -39,6 +42,7 @@ class CartController extends Controller
           'minut' => $minut,
           'hour' => $hour,
           'day' => $day,
+          'lvl' => $lvl,
         ]);
 
 
@@ -116,27 +120,44 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $gem)
     {
+      $lvls = Auth::user()->lvl;
+      $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
+    //  $lv = Level::where('exp_to_lvl')->get();
+
+
+      //dd($lv);
+
 
       $request->validate([
         'product_name' => ['required', 'string']
       ]);
 
-
-
-
       $gem->dat = $timestamp = date("Y-m-d H:i:s");
-
       $gem = $gem->fill($request->only(['product_name', 'total_time', 'exp', 'image_url', 'dat', 'button']))->save();
+
+
+
 
       // прибавление опыта игроку
       $ex = Auth::user()->exp; // общее количество опыта у игрока
+      $level = Auth::user()->lvl; //уровень игрока
       $accrual = request()->input('exp'); // количество получаемого опыта
       $addition = $ex + $accrual;
       $result = $addition;
 
-      $user = Users::findOrFail(Auth::user()->id);
-      $user->exp = $result;
-      $user->save();
+      if ($ex <= $lv) {
+        $user = Users::findOrFail(Auth::user()->id);
+        $user->exp = $result;
+        $user->save();
+      }else{
+        ++$level;
+        $subtraction = $ex - $lv;
+        $resul = $subtraction;
+        $user = Users::findOrFail(Auth::user()->id);
+        $user->exp = $resul;
+        $user->lvl = $level;
+        $user->save();
+      }
 
       if($gem){
         return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру');

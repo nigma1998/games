@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-<h1>Привет {{ Auth::user()->name }}</h1></br>
+<h1>Привет {{ Auth::user()->name }}</h1> ваш уровень {{ Auth::user()->lvl}} </br>
                     {{ __('Вы вошли в систему!') }}
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

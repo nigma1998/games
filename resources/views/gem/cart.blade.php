@@ -319,9 +319,11 @@ $ir = date("Y", strtotime($lafLis->dat));
     <img width="16" height="16" src="/Themes/images/diamond.png" />
     <span class="game_actions_text">721</span> <span>алмаз</span>
     <img width="16" height="16" src="/Themes/images/exp.png" />
-    <span class="game_actions_text">3.417g</span> <span>/ <span class="next_exp">30g</span> опыта</span>
+    @foreach($lvl as $lvls)
+    <span class="game_actions_text">3.417g</span> <span>/ <span class="next_exp"></span> опыта</span>
+    @endforeach
     <img width="16" height="16" src="/Themes/images/fruit-apple-half.png" />
-    <span>43</span> <span>уровень</span>
+    <span>{{ Auth::user()->lvl}} </span> <span>уровень</span>
 </div>
 
 </div>
@@ -333,44 +335,6 @@ $ir = date("Y", strtotime($lafLis->dat));
         <div>Вы зашли как ТуманныеНочи | <a class="footer_link" href="/Logout">Выйти</a></div>
 
     </div>
-
-    <div id="treasuresLink" class="padbottom_m" style="display: none">
-        <div><a href="http://xrpg.mobi"><img width="60" src="/Themes/images/icon_xrpg.png"/></a></div>
-        <a style="color:#ab47fd" href="http://xrpg.mobi">Охота началась!</a>
-    </div>
-
-    <div style="text-align: center">
-        <span class="minor">Добавь в закладки</span>
-        <a style="color:#ab47fd" href="http://xospital.mobi">xospital.mobi</a>
-    </div>
-
-    <div>
-        <a class="footer_link" href="/Support">Тех.поддержка</a>
-
-        |
-        <a class="footer_link" href="/Agreement">Соглашение</a>
-
-        |
-        <a class="footer_link" href="/Contacts">Контакты</a>
-    </div>
-
-    <div class="padtop_s padbottom_s">
-        Онлайн-игра Интерны
-
-        <br/>
-        © Fruitshake 2022
-
-               <div class="padtop_s">
-                   <a class="gray" href="https://portal.fruitshake.mobi?src=3">Другие игры</a>
-               </div>
-
-    </div>
-    <div class="smallfont">
-        11.08.2022 15:44:24,
-        15 мс,
-        16+
-    </div>
-
 </div>
 
 

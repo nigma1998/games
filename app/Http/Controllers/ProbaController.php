@@ -72,17 +72,19 @@ class ProbaController extends Controller
      */
     public function update(Request $request, Cart $proba)
     {
+
+
       $request->validate([
 
       ]);
-      $proba->id;
+      $inkriment = $proba->id;
       $proba->dat = $timestamp = date("Y-m-d H:i:s");
     //  dd($proba->id);
       $proba = $proba->fill($request->only(['identifier', 'chat_nps', 'dat']))->save();
 
 
     if($proba){
-      return redirect()->route('gem.proba.edit',  ['proba'=> $proba]);
+      return redirect()->route('gem.proba.edit',  ['proba'=> $inkriment]);
    }
 
     return back()->withInput()->with('error', 'Заключённый сбежал');
