@@ -25,7 +25,7 @@
         <h3>Ожидающие подозреваемые</h3>
 
     </div>
-    <a href="{{ route('admin.nps.index') }}">Вернуться обратно</a>
+    <a href="{{ route('gem.gem.index') }}">Вернуться обратно</a>
     <ul class="delim-list padtop_s">
 
         <li class="padtop_s first-li ">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
 
-                        <input type="hidden" class="form-control" name="exp" id="exp" value="">
+                        <input type="hidden" class="form-control" name="exp" id="exp" value="{{ Auth::user()->personal_experience }}">
                         </div>
                         <div class="form-group">
                         <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">

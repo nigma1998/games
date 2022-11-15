@@ -16,6 +16,7 @@
               <th scope="col">Картинка</th>
               <th scope="col">время</th>
               <th scope="col">опыт</th>
+              <th scope="col">описание</th>
               <th scope="col">Управление</th>
             </tr>
           </thead>
@@ -29,6 +30,7 @@
 
               <td>{{$npsLis->total_time}}</td>
               <td>{{$npsLis->exp}}</td>
+              <td>{{$npsLis->description}}</td>
               <td> <a href="{{ route('admin.nps.edit', ['np'=> $npsLis->id]) }}">редактирование</a></td>
             </tr>
 @empty

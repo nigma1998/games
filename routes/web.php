@@ -5,6 +5,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\NpsController;
 use App\Http\Controllers\ProbaController;
+use App\Http\Controllers\CanteenController;
+use App\Http\Controllers\DiamondController;
 use App\Http\Controllers\TimController;
 use App\Http\Controllers\Admin\GlobalController as AdminGlobalController;
 use App\Http\Controllers\Admin\NpsController as AdminNpsController;
@@ -35,7 +37,10 @@ Route::resource('users', AdminUserController::class);
 Route::resource('schablon', AdminSchablonControllerController::class);
 });
 
+Route::group(['prefix' => 'canteen', 'as' => 'canteen.'], function(){
+Route::resource('canteen', CanteenController::class);
 
+  });
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -45,7 +50,10 @@ Route::resource('gem', CartController::class);
 Route::resource('nonesk', NpsController::class);
 Route::resource('taim', TimController::class);
 Route::resource('proba', ProbaController::class);
+Route::resource('diamond', DiamondController::class);
   });
+
+
 
 //Route::get('/gem', [CartController::class, 'index'])->name('gem');
 //Route::get('/gem/create', [CartController::class, 'create'])->name('create');

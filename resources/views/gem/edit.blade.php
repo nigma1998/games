@@ -20,13 +20,7 @@
 </div>
 <div class="content">
     <div class="padtop_s">
-<div class="major_event">
-    <ul>
-        <li class="center">
-            <a class="epic_n" href="/Forum/Topics?subjectId=0fba9ff9-b09f-4410-b9a7-6b9e51b21bb4">Свежие новости</a>
-        </li>
-    </ul>
-</div>
+
 </div>
 
 <div class="block">
@@ -61,7 +55,7 @@
         <span class="ylwtitle">{{$lafLis->total_time}}.</span>
     </div>
     <span>Опыт:</span>
-    <img width="16" height="16" src="/Themes/images/exp2.png"/><span class="money">{{$lafLis->exp}}</span><span class="minor">, </span>
+    <img width="16" height="16" src="{{ asset('storage/images/exp.png') }}"/><span class="money">{{$lafLis->exp}}</span><span class="minor">, </span>
     <span>Доход:</span>
     <img width="16" height="16" src="/Themes/images/coins2.png"/>
     <span class="money">550</span><span class="minor">, </span>

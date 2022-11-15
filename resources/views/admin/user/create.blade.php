@@ -46,6 +46,10 @@
                         <label for="exp">Опыт</label>
                         <input type="text" class="form-control" name="exp" id="exp" value="{{ old('exp') }}">
                         </div>
+                        <div class="form-group">
+                        <label for="description">Описание</label>
+                        <input type="text" class="form-control" name="description" id="description" value="{{ old('description') }}">
+                        </div>
                       <!--  <div class="form-group">
                         <label for="image_url">Изображение</label>
                         <input type="file" class="form-control" name="image_url" id="image_url">

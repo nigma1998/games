@@ -1,6 +1,8 @@
 @extends('layouts.gamm')
 @section('content')
 
+
+
 <div class="content">
     <div class="block">
 @include('inc.message')
@@ -13,28 +15,28 @@
 
 
     <ul class="delim-list padtop_s">
-      @foreach($laf as $lafLis)
-      @if($lafLis->total_time = $lafLis->total_time)
+      @foreach($userlist as $userlist)
+      @if($userlist->total_time = $userlist->total_time)
       <li class="padtop_s first-li">
-              <td> <img class="icon" width="48" height="48" src="{{ Storage::url($lafLis->image_url)}}"/> </td>
+              <td> <img class="icon" width="48" height="48" src="{{ Storage::url($userlist->image_url)}}"/> </td>
           <div class="row">
               <div>
-                      <span class="patienttitle">{{ $lafLis->product_name }}</span>
+                      <span class="patienttitle">{{ $userlist->product_name }}</span>
 <span class="minor smallfont">
 
 @php
 // реализация самого таймера
-$timeh = date('H', strtotime($lafLis->updated_at));
-$timei = date('i', strtotime($lafLis->updated_at));
-$times = date('s', strtotime($lafLis->updated_at));
+$timeh = date('H', strtotime($userlist->updated_at));
+$timei = date('i', strtotime($userlist->updated_at));
+$times = date('s', strtotime($userlist->updated_at));
 
 // за основу взята функция mktime
 $s = $times; // переменная секунда
 $x = $timeh;// переменная час
-$r = $timei + $lafLis->total_time;// переменная минуты здесь же мы прибовляем время которая храниться в бд
-$m = date("m", strtotime($lafLis->updated_at));// переменная месяц
-$e = date("d", strtotime($lafLis->updated_at));// переменная день
-$i = date("Y", strtotime($lafLis->updated_at));// переменная год
+$r = $timei + $userlist->total_time;// переменная минуты здесь же мы прибовляем время которая храниться в бд
+$m = date("m", strtotime($userlist->updated_at));// переменная месяц
+$e = date("d", strtotime($userlist->updated_at));// переменная день
+$i = date("Y", strtotime($userlist->updated_at));// переменная год
 
 $endOfDiscount = mktime($x,$r,$s,$m,$e,$i);
 $now = time(); // текущее время
@@ -81,9 +83,9 @@ $secondsRemaining -= ($minutesRemaining * $minut);     //обновляем пе
                  <div>
 
 @php
-$tameh = date('H', strtotime($lafLis->dat));
-$tamei = date('i', strtotime($lafLis->dat));
-$tames = date('s', strtotime($lafLis->dat));
+$tameh = date('H', strtotime($userlist->dat));
+$tamei = date('i', strtotime($userlist->dat));
+$tames = date('s', strtotime($userlist->dat));
 
 
 
@@ -91,9 +93,9 @@ $tames = date('s', strtotime($lafLis->dat));
 $sar = $tames;
 $xix = $tameh;
 $rar = $tamei + Auth::user()->button;
-$mab = date("m", strtotime($lafLis->dat));
-$ey = date("d", strtotime($lafLis->dat));
-$ir = date("Y", strtotime($lafLis->dat));
+$mab = date("m", strtotime($userlist->dat));
+$ey = date("d", strtotime($userlist->dat));
+$ir = date("Y", strtotime($userlist->dat));
 
   $end = mktime($xix,$rar,$sar,$mab,$ey,$ir);
   $naw = time(); // текущее время
@@ -142,8 +144,8 @@ $ir = date("Y", strtotime($lafLis->dat));
 
   @else
 </div>
-    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Быстрый допрос</a></br>
-    <a href="{{ route('gem.proba.edit', ['proba'=> $lafLis->id]) }}">Личный допрос</a>
+    <a href="{{ route('gem.taim.edit', ['taim' => $userlist->id]) }}">Быстрый допрос</a></br>
+    <a href="{{ route('gem.proba.edit', ['proba'=> $userlist->id]) }}">Личный допрос</a>
 
 
 
@@ -153,7 +155,7 @@ $ir = date("Y", strtotime($lafLis->dat));
 @else
 
 </br>
-    <a href="{{ route('gem.nonesk.edit', ['nonesk'=> $lafLis->id]) }}">Завершить допрос</a>
+    <a href="{{ route('gem.nonesk.edit', ['nonesk'=> $userlist->id]) }}">Завершить допрос</a>
 @endif
 <!--здесь должно отображаться таймер до следующего сокращение времени-->
               </div>
@@ -173,12 +175,12 @@ $ir = date("Y", strtotime($lafLis->dat));
                     <img class="icon_l" width="48" height="48" src="{{ Storage::url($lafL->url)}}">
                 <div class="row">
                     <div>
-                            <span class="patienttitle">Свободная палата</span>
+                            <span class="patienttitle">Свободная кухня</span>
 <span class="minor smallfont"></span>                    </div>
                     <div>
 
     <img width="16" height="16" src="/Themes/images/diagnosis.png"/>
-<a href="{{ route('gem.gem.edit', ['gem'=> $lafLis->id]) }}">Принять подозреваемого</a>
+<a href="{{ route('gem.gem.edit', ['gem'=> $userlist->id]) }}">Принять подозреваемого</a>
                     </div>
                 </div>
                 <div style="clear: both"></div>
@@ -197,10 +199,10 @@ $ir = date("Y", strtotime($lafLis->dat));
 
 <div>
     <img class="icon" width="48" height="48" src="{{ Storage::url($lafL->url)}}"/>
-    <span class="drugtitle">Новая палата</span>
+    <span class="drugtitle">Новая кухня</span>
     <div>
                 <img width="16" height="16" src="/Themes/images/cart.png"/>
-                <a href="{{ route('gem.gem.create') }}">Купить</a>
+                <a href="{{ route('canteen.canteen.create') }}">Купить</a>
             за
                 <img width="16" height="16" src="/Themes/images/diamond.png"/>
             <span class="ylwtitle">1000 алмазов</span>

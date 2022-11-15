@@ -53,6 +53,11 @@
                         <input type="file" class="form-control" name="image_url" id="image_url">
                         </div>
 
+                        <div class="form-group">
+                        <label for="description">Время</label>
+                        <input type="text" class="form-control" name="description" id="description" value="{{ $npsLis->description }}">
+                        </div>
+
 
                         <button class="btn btn-primary">Сохранить</button>
 

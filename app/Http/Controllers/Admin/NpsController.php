@@ -114,9 +114,11 @@ class NpsController extends Controller
       $validated = $request->validate([
         'product_name' => ['required', 'string'],
         'exp' => ['required', 'string'],
+        'total_time' => ['required', 'string'],
+        'description' => ['required', 'string'],
       ]);
 
-      $data = $request->only(['product_name', 'total_time', 'exp', 'image_url']);
+      $data = $request->only(['product_name', 'total_time', 'exp', 'description', 'image_url']);
 
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);

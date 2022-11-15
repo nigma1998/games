@@ -66,11 +66,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+      //процесс покупки камеры
       $validated = $request->validate([
         'user' => ['required', 'string']
       ]);
 
       $data = $request->only(['user']);
+      //dd($request);
       $userList = Cart::create($data);
 
 
@@ -122,10 +124,7 @@ class CartController extends Controller
     {
       $lvls = Auth::user()->lvl;
       $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
-    //  $lv = Level::where('exp_to_lvl')->get();
 
-
-      //dd($lv);
 
 
       $request->validate([
@@ -160,7 +159,7 @@ class CartController extends Controller
       }
 
       if($gem){
-        return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру');
+        return redirect()->route('gem.gem.index')->with('success', 'Заключёный успешно прибыл в камеру вы получили ' . $accrual . ' опыта');
       }
 
       return back()->withInput()->with('error', 'Заключённый сбежал');
