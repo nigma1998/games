@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\Images;
+use App\Services\UploadedService;
+use App\Models\Product;
 
-class ProbaController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,13 @@ class ProbaController extends Controller
      */
     public function index()
     {
-        //
+      $productList = Product::select(Product::$allowedFields)->get();
+
+      return view('admin.product.product',
+      ['productList' => $productList,
+
+    ]
+    );
     }
 
     /**
@@ -25,7 +32,7 @@ class ProbaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create');
     }
 
     /**
@@ -36,8 +43,24 @@ class ProbaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+        'name' => ['required', 'string'],
+        'room' => ['required', 'string']
+      ]);
+
+
+      $data = $request->only(['name', 'room']);
+      $productList = Product::create($data);
+
+
+      if($productList){
+        return redirect()->route('admin.product.index')->with('success', 'продукт успешно создан');
+      }
+
+      return back()->withInput()->with('error', 'Не удолось создать продукт');
+
     }
+    
 
     /**
      * Display the specified resource.
@@ -56,11 +79,9 @@ class ProbaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $proba)
+    public function edit($id)
     {
-      return view('gem.probapera',[
-          'interrogation' => $proba,
-      ]);
+        //
     }
 
     /**
@@ -70,24 +91,10 @@ class ProbaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $proba)
+    public function update(Request $request, $id)
     {
-
-      $request->validate([
-
-      ]);
-      $inkriment = $proba->id;
-      $proba->dat = $timestamp = date("Y-m-d H:i:s");
-    //  dd($proba->id);
-      $proba = $proba->fill($request->only(['identifier', 'chat_nps', 'dat']))->save();
-
-
-    if($proba){
-      return redirect()->route('gem.proba.edit',  ['proba'=> $inkriment]);
-   }
-
-    return back()->withInput()->with('error', 'Заключённый сбежал');
-  }
+        //
+    }
 
     /**
      * Remove the specified resource from storage.

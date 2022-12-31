@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Canteen;
+use App\Models\Level;
 use App\Models\Cart;
+use App\Models\Users;
+use App\Models\Dish;
 use App\Models\Schablon;
 use App\Helper\TimeHelper;
 
@@ -87,24 +90,72 @@ class CanteenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Canteen $canteen
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Canteen $canteen)
     {
-        //
+      $dishList = Dish::select(Dish::$allowedFields)->get();
+
+        return view('canteen.edit', [
+          'canteen' => $canteen,
+          'dishList' => $dishList,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Canteen $canteen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Canteen $canteen)
     {
-        //
+
+      $lvls = Auth::user()->lvl;
+      $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
+
+      
+
+      $request->validate([
+        'product_name' => ['required', 'string']
+      ]);
+
+      $canteen->dat = $timestamp = date("Y-m-d H:i:s");
+      $canteen = $canteen->fill($request->only(['id', 'image_url', 'product_name', 'ingredient_one', 'amount_one', 'ingredient_two',
+      'amount_two', 'ingredient_three', 'amount_three', 'dat',
+      'ingredient_four', 'ingredient_five', 'amount_five', 'ingredient_six', 'amount_six', 'exp', 'total_time' ]))->save();
+
+
+
+
+      // прибавление опыта игроку
+      $ex = Auth::user()->exp; // общее количество опыта у игрока
+      $level = Auth::user()->lvl; //уровень игрока
+      $accrual = request()->input('exp'); // количество получаемого опыта
+      $addition = $ex + $accrual;
+      $result = $addition;
+
+      if ($ex <= $lv) {
+        $user = Users::findOrFail(Auth::user()->id);
+        $user->exp = $result;
+        $user->save();
+      }else{
+        ++$level;
+        $subtraction = $ex - $lv;
+        $resul = $subtraction;
+        $user = Users::findOrFail(Auth::user()->id);
+        $user->exp = $resul;
+        $user->lvl = $level;
+        $user->save();
+      }
+
+      if($canteen){
+        return redirect()->route('canteen.canteen.index')->with('success', 'рецепт успешно попал на кухню ' . $accrual . ' опыта');
+      }
+
+      return back()->withInput()->with('error', 'Рецепт сбежал');
     }
 
     /**

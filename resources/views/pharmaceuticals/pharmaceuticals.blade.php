@@ -1,25 +1,18 @@
 @extends('layouts.gamm')
 @section('content')
 
-
-
-
 <div class="content">
     <div class="block">
 @include('inc.message')
     <div>
         <img width="16" height="16" src="/Themes/images/refresh.png"/>
-        <a href="{{ route('gem.gem.index') }}">Обновить</a>
+        <a href="{{ route('pharmaceuticals.pharmaceuticals.index') }}">Обновить</a>
         <a href="{{ url('home') }}">Домой</a>
     </div>
 
     <ul class="delim-list padtop_s">
-      @foreach($laf as $lafLis)
-      @php
+      @foreach($lab as $lafLis)
 
-      $button = $prob->foodButton($lafLis->updated_at, $lafLis->total_tim)
-
-      @endphp
       @if($lafLis->total_time = $lafLis->total_time)
       <li class="padtop_s first-li">
               <td> <img class="icon" width="48" height="48" src="{{ Storage::url($lafLis->image_url)}}"/> </td>
@@ -28,34 +21,8 @@
 
 <span class="minor smallfont">
   <div class="spravca"> <input type="checkbox" id="{{ $lafLis->id }}" class="reference"/>
-<label for="{{ $lafLis->id }}" ><span class="patienttitle">{{ $lafLis->product_name }}</span></label>
-<span class="story">
-  <div class="explain smallfont" style="padding:4px;">
-  <ul>
-      <li class="padbottom_s">
-          <img width="16" height="16" src="/Themes/images/info.png"/>
-          <span class="ylwtitle">Курс лечения</span>
-      </li>
+<span class="patienttitle">{{ $lafLis->product_name }}</span>
 
-          <li style='margin-left:20px;'>
-              <span class="">29x Обезболивающее: </span><span>Выпить</span> через <span class='ylwtitle'>
-                 {{ $prob->foodButton($lafLis->updated_at, $lafLis->total_time) }}
-
-
-               </span>
-          </li>
-
-          <li style='margin-left:20px;'>
-              <span class="">29x Щипцы: </span><span>Использовать</span> через <span class='ylwtitle'>{{ $prob->foodButtonYon($lafLis->updated_at, $lafLis->total_time) }}</span>
-          </li>
-
-          <li style='margin-left:20px;'>
-              <span class="">1x Пакет для головы: </span><span>Использовать</span> через <span class='ylwtitle'>20 ч. 47 мин.</span>
-          </li>
-
-  </ul>
-  </div>
-</span>
 </div>
 <div>
 
@@ -74,6 +41,30 @@ $e = date("d", strtotime($lafLis->updated_at));// переменная день
 $i = date("Y", strtotime($lafLis->updated_at));// переменная год
 
 $endOfDiscount = mktime($x,$r,$s,$m,$e,$i);
+@endphp
+@switch($lafLis->identifier)
+@case(1)
+@if($lafLis->delivery <= 0)
+<a href="{{ route('gem.button.edit', ['button'=> $lafLis->id]) }}">Выбрать способ доставки</a>
+@else
+<form  method="post" action="{{ route('gem.button.update', ['button'=> $lafLis->id]) }}" onchange="this.form.submit()"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="identifier" id="identifier" value="2">
+  </div>
+  <button class="btn btn-primary">Оформить заказ</button>
+</form>
+
+
+@endif
+
+
+@break
+
+     @default(2)
+
+@php
 $now = time(); // текущее время
 $secondsRemaining = $endOfDiscount - $now; // оставшееся время
 
@@ -149,6 +140,8 @@ $ir = date("Y", strtotime($lafLis->dat));
   $minutes = floor($ref / $minut); //минуты до даты
   $ref -= ($minutes * $minut);     //обновляем переменную
 @endphp
+
+
   @if ($days > -1)
   <div class='blog'>До следующего опроса
     @if($days > 0)
@@ -179,48 +172,72 @@ $ir = date("Y", strtotime($lafLis->dat));
 
   @else
 </div>
-    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Быстрый допрос</a></br>
-    <a href="{{ route('gem.proba.edit', ['proba'=> $lafLis->id]) }}">Личный допрос</a>
 
 
+    <form  method="post" action="{{ route('gem.button.update', ['button'=> $lafLis->id]) }}"  enctype="multipart/form-data">
+      @csrf
+      @method('put')
 
-@endif
+
+  @php
+    // здесь реализуеться сокращение таймера
+  $daysRemaining * 24; // преобразовываем день в час
+  $hoursRemaining;
+  $plus = $daysRemaining + $hoursRemaining * 60;
+  $minutesRemaining;
+  $peremenaj = $plus + $minutesRemaining ;
+
+  $tare = 500; // условное значени позже будет переписанно на значение из бд
+
+  $arrr = $peremenaj - $tare; // вычитаем из общего время нужную сумму
+  $aq = $arrr; // результат присваиваем этой переменной и вносим в бд
+
+  @endphp
+      <div class="form-group">
+      <input type="hidden" class="form-control" name="total_time" id="total_time" value="{{$aq}}">
+      </div>
+      <button class="btn btn-primary">Сократить время</button>
+    </form>
+
+    @endif
 
 
 @else
 
+
+
 </br>
 
-
-      <form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+      <form  method="post" action="{{ route('pharmaceuticals.bonus.update', ['bonu'=> $lafLis->id]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
       @csrf
-      @method('put')
+@method('put')
+      @foreach($lab as $lafLis)
 
       <div class="form-group">
-
-      <input type="hidden" class="form-control" name="product_name" id="product_name" value="">
+      <input type="hidden" class="form-control" name="product_name" id="product_name" value="{{ $lafLis->product_name}}">
       </div>
       <div class="form-group">
-
+      <input type="hidden" class="form-control" name="income" id="income" value="{{ $lafLis->income }}">
+      </div>
+      <div class="form-group">
       <input type="hidden" class="form-control" name="total_time" id="total_time" value="">
       </div>
       <div class="form-group">
-
       <input type="hidden" class="form-control" name="exp" id="exp" value="{{ Auth::user()->personal_experience }}">
       </div>
       <div class="form-group">
-      <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
+      <input type="hidden" class="form-control" name="price" id="price" value="">
       </div>
       <div class="form-group">
-
-      <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
+      <input type="hidden" class="form-control" name="amount" id="amount" value="{{ $lafLis->amount }}">
       </div>
-
-      <button class="btn btn-primary">Отправить на этап</button>
+        @endforeach
+      <button class="btn btn-primary">Получить заказ</button>
 
 
     </form>
 @endif
+@endswitch
 <!--здесь должно отображаться таймер до следующего сокращение времени-->
               </div>
           </div>
@@ -244,7 +261,7 @@ $ir = date("Y", strtotime($lafLis->dat));
                     <div>
 
     <img width="16" height="16" src="/Themes/images/diagnosis.png"/>
-<a href="{{ route('gem.gem.edit', ['gem'=> $lafLis->id]) }}">Принять подозреваемого</a>
+<a href="{{ route('pharmaceuticals.pharmaceuticals.edit', ['pharmaceutical'=> $lafLis->id]) }}">Заказать медикомент</a>
                     </div>
                 </div>
                 <div style="clear: both"></div>
@@ -266,7 +283,7 @@ $ir = date("Y", strtotime($lafLis->dat));
     <span class="drugtitle">Новая палата</span>
     <div>
                 <img width="16" height="16" src="/Themes/images/cart.png"/>
-                <a href="{{ route('gem.gem.create') }}">Купить</a>
+                <a href="{{ route('pharmaceuticals.pharmaceuticals.create') }}">Купить</a>
             за
                 <img width="16" height="16" src="/Themes/images/diamond.png"/>
             <span class="ylwtitle">1000 алмазов</span>
@@ -280,18 +297,22 @@ $ir = date("Y", strtotime($lafLis->dat));
             @endempty
     </ul>
     <ul class="padtop_m">
-        <li>
-            <img width="16" height="16" src="/Themes/images/pill.png"/>
-            <a href="/Rooms/ChangeCurrentVitamin?t=637958294648680268&page=1">Выбрать Обед для подозреваемого</a>:
-                <div style="margin-left:21px">
-                    Живительный напиток
-                </div>
-        </li>
-        <li class="padtop_m">
-            <img width="16" height="16" src="/Themes/images/receptionist.png"/>
-            <a href="/Reception?t=637958294648680268">Приемная</a>
-        </li>
-    </ul>
+      @foreach($lab as $lafLis)
+      <li>
+          <img width="16" height="16" src="/Themes/images/pill.png"/>
+          <a href="{{ route('pharmaceuticals.bonus.index') }}">Выбрать способ доставки</a>:
+              <div style="margin-left:21px">
+
+
+
+              </div>
+      </li>
+      <li class="padtop_m">
+          <img width="16" height="16" src="/Themes/images/receptionist.png"/>
+          <a href="/Reception?t=637958294648680268">Приемная</a>
+      </li>
+  </ul>
+  @endforeach
 
 </div>
 

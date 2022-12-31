@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group">
-                        <label for="description">Время</label>
+                        <label for="description">Описание</label>
                         <input type="text" class="form-control" name="description" id="description" value="{{ $npsLis->description }}">
                         </div>
 

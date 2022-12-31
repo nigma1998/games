@@ -3,11 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\ButtonController;
 use App\Http\Controllers\NpsController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProbaController;
 use App\Http\Controllers\CanteenController;
+use App\Http\Controllers\BonusController;
+use App\Http\Controllers\PharmaceuticalsController;
 use App\Http\Controllers\DiamondController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\TimController;
+use App\Http\Controllers\Admin\MedicinesController as AdminMedicinesController;
+use App\Http\Controllers\Admin\BonusController as AdminBonusController;
+use App\Http\Controllers\Admin\DishController as AdminDishController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\GlobalController as AdminGlobalController;
 use App\Http\Controllers\Admin\NpsController as AdminNpsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -32,14 +41,26 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['prefix' => 'admins', 'as' => 'admin.'], function(){
 Route::resource('global', AdminGlobalController::class);
+Route::resource('bonus', AdminBonusController::class);
+Route::resource('product', AdminProductController::class);
 Route::resource('nps', AdminNpsController::class);
+Route::resource('medicines', AdminMedicinesController::class);
+Route::resource('dish', AdminDishController::class);
 Route::resource('users', AdminUserController::class);
 Route::resource('schablon', AdminSchablonControllerController::class);
 });
 
 Route::group(['prefix' => 'canteen', 'as' => 'canteen.'], function(){
 Route::resource('canteen', CanteenController::class);
+});
 
+  Route::group(['prefix' => 'stock', 'as' => 'stock.'], function(){
+  Route::resource('stock', StockController::class);
+  });
+
+  Route::group(['prefix' => 'pharmaceuticals', 'as' => 'pharmaceuticals.'], function(){
+  Route::resource('pharmaceuticals', PharmaceuticalsController::class);
+  Route::resource('bonus', BonusController::class);
   });
 
 
@@ -50,15 +71,13 @@ Route::resource('gem', CartController::class);
 Route::resource('nonesk', NpsController::class);
 Route::resource('taim', TimController::class);
 Route::resource('proba', ProbaController::class);
+Route::resource('button', ButtonController::class);
 Route::resource('diamond', DiamondController::class);
   });
 
 
+Route::post('pharmaceuticals/pharmaceuticals/{$button}', [GeneralController::class, 'updat'])->name('general.updat');
 
-//Route::get('/gem', [CartController::class, 'index'])->name('gem');
-//Route::get('/gem/create', [CartController::class, 'create'])->name('create');
-//Route::get('/gem/view', [CartController::class, 'edit'])->name('edit');
-//Route::post('/gem/store', [CartController::class, 'store'])->name('store');
 
 
 Route::resource('view', ViewController::class);

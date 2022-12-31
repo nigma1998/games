@@ -108,6 +108,24 @@ html, div, span, h1, h2, h3, form, p, img, ul, li {
     padding: 2px;
 }
 
+.reference {
+display: none;
+}
+.reference ~ .story {
+display: none;
+}
+.reference + label {
+font-size: 16px;
+padding: 0;
+color: green;
+cursor: pointer;
+display: inline-block;
+}
+.reference:checked ~ .story {
+display: block;
+padding: 4px;
+}
+
     .clothes-panel td {
         vertical-align: top;
     }

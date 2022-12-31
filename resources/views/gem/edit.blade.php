@@ -29,7 +29,7 @@
         <h3>Ожидающие подозреваемые</h3>
 
     </div>
-    <a href="{{ route('admin.nps.index') }}">Вернуться обратно</a>
+    <a href="{{ route('gem.gem.index') }}">Вернуться обратно</a>
     <ul class="delim-list padtop_s">
 
         <li class="padtop_s first-li ">

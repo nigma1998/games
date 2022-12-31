@@ -1,3 +1,15 @@
+@php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Cart;
+use App\Models\Level;
+use App\Models\Users;
+use App\Models\Images;
+use App\Models\Schablon;
+use App\Helper\TimeHelper;
+use App\Helper\TaimHelper;
+@endphp
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,6 +45,11 @@
             </li>
             <li>
                 <img width="16" height="16" alt="o" src="{{ asset('storage/images/ico.jpg') }}">
+                    <a href="{{ route('pharmaceuticals.pharmaceuticals.index') }}">Формацефтика</a>
+                    <span class="ylwtitle">(12)</span>
+            </li>
+        <!--    <li>
+                <img width="16" height="16" alt="o" src="{{ asset('storage/images/ico.jpg') }}">
                     <a href="{{ route('canteen.canteen.index') }}">Столовая</a>
                     <span class="ylwtitle">(12)</span>
             </li>
@@ -44,26 +61,13 @@
                 <li>
                     <img width="16" height="16" alt="o" src="{{ asset('storage/images/carzr.png') }}">
                         <a href="/Quests?t=637958294648680268">Карцр</a>
-<span class="ylwtitle">(*)</span>                </li>
+<span class="ylwtitle">(*)</span>                </li>-->
                 <li>
                     <img width="16" height="16" alt="o" src="{{ asset('storage/images/name.png') }}">
                         <a href="/VetClinic?t=637958294648680268">Автопарк</a>
                         <span class="ylwtitle">(5)</span>
                 </li>
-            <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/Patients/patient5.png" />
-                <a href="{{ route('gem.diamond.index') }}">Пальма</a>
-            </li>
-                <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/Tasks/tasks.png" />
-                    <a href="/DiamondsTasks?t=637958294648690268">Алмазные задания</a>
-                </li>
 
-                <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/Tasks/tasks.png" />
-                        <a href="/DailyTasks?t=637958294648690268">Ежедневные задания</a>
-                        <span class="ylwtitle">(1)</span>
-                </li>
                 <li>
                     <img width="16" height="16" alt="o" src="/Themes/images/misc/cup-3.png">
                     <a href="/Competitions?t=637958294648690268">Соревнования</a>
@@ -71,7 +75,7 @@
                 </li>
             <li>
                 <img width="16" height="16" alt="o" src="/Themes/images/warehouse.png">
-                    <a href="/Warehouse">Склад</a>
+                    <a href="{{ route('stock.stock.index') }}">Склад</a>
             </li>
             <li>
                 <img width="16" height="16" alt="o" src="/Themes/images/cart.png">
@@ -82,23 +86,7 @@
                 <img width="16" height="16" alt="o" src="/Themes/images/cabinet-icon.png">
                     <a href="/Cabinet?t=637958294648690268">Кабинет</a>
             </li>
-            <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/emergency-icon.png">
-                <a href="/Operation">Операционная</a>
-            </li>
-            <li class="padtop_m">
-                <img width="16" height="16" alt="o" src="/Themes/images/globe-green.png">
-                    <a class="epic" href="/WorldEvents">События</a>
-            </li>
-            <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/diamond.png">
-                <a href="/Bank?t=637958294648690268">Алмазы</a>
-                    <span class="ylwtext">(</span><span class="epic">100%</span> <span class="ylwtext"> <img width="16" height="16" alt="o" src="/Themes/images/diamond.png"> алмазов в подарок)</span>
-            </li>
-                <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/diamond.png">
-                    <a class="epic" href="/WorldEvents">Cкидки на оборудование!</a>
-                </li>
+            
             <li>
                 <img width="16" height="16" alt="o" src="/Themes/images/folder.png">
                     <a href="/Forum">Форум</a>
@@ -135,14 +123,19 @@
     </div>
 </div>
 <div class="notify smallfont block">
+@php
 
+$lvls = Auth::user()->lvl;
+$lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
+
+@endphp
     <span class="game_actions_text"><img width="16" height="16" src="/Themes/images/coins2.png"/>
-13 784 273 856 монет</span>
+{{ Auth::user()->coins}} монет</span>
     <img width="16" height="16" src="/Themes/images/diamond.png" />
     <span class="game_actions_text">721</span> <span>алмаз</span>
-    <img width="16" height="16" src="/Themes/images/exp.png" />
+    <img width="16" height="16" src="{{ asset('storage/images/exp.png') }}" />
 
-    <span class="game_actions_text">3.417g</span> <span>/ <span class="next_exp"></span> опыта</span>
+    <span class="game_actions_text">@php  echo  $lv @endphp </span> <span>/ <span class="next_exp">{{ Auth::user()->exp}}</span> опыта</span>
 
     <img width="16" height="16" src="/Themes/images/fruit-apple-half.png" />
     <span>{{ Auth::user()->lvl}} </span> <span>уровень</span>
@@ -152,9 +145,9 @@
 
 
 <div class="padtop_m gray" style="text-align:center;">
-    <div class="padbottom_m msg logininfo">
+    <div class="">
 
-        <div>Вы зашли как ТуманныеНочи | <a class="footer_link" href="/Logout">Выйти</a></div>
+        <div>Вы зашли как {{ Auth::user()->name}}</div> <br>
 
     </div>
 </div>

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\Images;
+use App\Models\Bonus;
+use App\Services\UploadedService;
 
-class ProbaController extends Controller
+class BonusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,13 @@ class ProbaController extends Controller
      */
     public function index()
     {
-        //
+      $bonusList = Bonus::select(Bonus::$allowedFields)->get();
+
+      return view('admin.bonus.bonus',
+      ['bonusList' => $bonusList,
+
+    ]
+    );
     }
 
     /**
@@ -25,7 +32,7 @@ class ProbaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.bonus.create');
     }
 
     /**
@@ -36,7 +43,28 @@ class ProbaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+        'name' => ['required', 'string'],
+      ]);
+
+
+
+      if($request->hasFile('image_url')){
+      $uploadedService = app(UploadedService::class);
+      $validated['image_url'] = $uploadedService->fileUpload(
+        $request->file('image_url')
+      );
+      }
+//dd($request);
+      $data = $request->only(['image_url', 'total_time', 'exp', 'name', 'price']);
+      $dishList = Bonus::create($data);
+
+
+      if($dishList){
+        return redirect()->route('admin.dish.index')->with('success', 'Бонус успешно создан');
+      }
+
+      return back()->withInput()->with('error', 'Не удолось создать Бонус');
     }
 
     /**
@@ -56,11 +84,9 @@ class ProbaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $proba)
+    public function edit($id)
     {
-      return view('gem.probapera',[
-          'interrogation' => $proba,
-      ]);
+        //
     }
 
     /**
@@ -70,24 +96,10 @@ class ProbaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $proba)
+    public function update(Request $request, $id)
     {
-
-      $request->validate([
-
-      ]);
-      $inkriment = $proba->id;
-      $proba->dat = $timestamp = date("Y-m-d H:i:s");
-    //  dd($proba->id);
-      $proba = $proba->fill($request->only(['identifier', 'chat_nps', 'dat']))->save();
-
-
-    if($proba){
-      return redirect()->route('gem.proba.edit',  ['proba'=> $inkriment]);
-   }
-
-    return back()->withInput()->with('error', 'Заключённый сбежал');
-  }
+        //
+    }
 
     /**
      * Remove the specified resource from storage.

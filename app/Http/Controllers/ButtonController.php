@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\Images;
 
-class ProbaController extends Controller
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Users;
+use App\Models\Schablon;
+use App\Models\Cart;
+use App\Models\Medezine;
+use App\Models\Delivery;
+use App\Models\Level;
+use App\Models\Pharmaceuticals;
+use App\Helper\TimeHelper;
+use App\Helper\TaimHelper;
+
+class ButtonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +35,8 @@ class ProbaController extends Controller
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -36,7 +47,8 @@ class ProbaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
+
     }
 
     /**
@@ -53,41 +65,38 @@ class ProbaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Pharmaceuticals $button
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $proba)
+    public function edit(Pharmaceuticals $button)
     {
-      return view('gem.probapera',[
-          'interrogation' => $proba,
-      ]);
+        return view('pharmaceuticals.bonus');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Pharmaceuticals $button
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $proba)
+    public function update(Request $request, Pharmaceuticals $button)
     {
 
-      $request->validate([
-
-      ]);
-      $inkriment = $proba->id;
-      $proba->dat = $timestamp = date("Y-m-d H:i:s");
-    //  dd($proba->id);
-      $proba = $proba->fill($request->only(['identifier', 'chat_nps', 'dat']))->save();
+    //  dd($button->identifier);
+      $button->dat = $timestamp = date("Y-m-d H:i:s");
 
 
-    if($proba){
-      return redirect()->route('gem.proba.edit',  ['proba'=> $inkriment]);
-   }
+      $button = $button->fill($request->only([ 'total_time', 'dat', 'identifier']))->save();
 
-    return back()->withInput()->with('error', 'Заключённый сбежал');
-  }
+
+
+      if($button){
+        return redirect()->route('pharmaceuticals.pharmaceuticals.index')->with('success', 'время сокращено');
+      }
+
+      return back()->withInput()->with('error', 'произошла ошибка');
+    }
 
     /**
      * Remove the specified resource from storage.

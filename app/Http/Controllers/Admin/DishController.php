@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Images;
+use App\Models\Dish;
 use App\Services\UploadedService;
 
-class NpsController extends Controller
+class DishController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,13 @@ class NpsController extends Controller
      */
     public function index()
     {
+      $dishList = Dish::select(Dish::$allowedFields)->get();
 
-        $npsList = Images::select(Images::$allowedFields)->get();
-      //    dd($npsList);
-        return view('admin.user.nps',
-        ['npsList' => $npsList,
+      return view('admin.dish.dish',
+      ['dishList' => $dishList,
 
-      ]
-      );
+    ]
+    );
     }
 
     /**
@@ -33,8 +32,7 @@ class NpsController extends Controller
      */
     public function create()
     {
-      return view('admin.user.create');
-
+        return view('admin.dish.create');
     }
 
     /**
@@ -45,10 +43,11 @@ class NpsController extends Controller
      */
     public function store(Request $request)
     {
-//dd($request);
       $validated = $request->validate([
-        'product_name' => ['required', 'string']
+        'name' => ['required', 'string'],
       ]);
+
+
 
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
@@ -56,26 +55,27 @@ class NpsController extends Controller
         $request->file('image_url')
       );
       }
+//dd($request);
+      $data = $request->only(['id', 'name', 'ingredient_one', 'amount_one', 'ingredient_two',
+      'amount_two', 'ingredient_three', 'amount_three',
+      'ingredient_four', 'ingredient_five', 'amount_five', 'ingredient_six', 'amount_six']);
+      $dishList = Dish::create($data);
 
-      $data = $request->only(['product_name', 'total_time', 'exp', 'image_url']);
-      $npsList = Images::create($data);
 
-
-      if($npsList){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно создан');
+      if($dishList){
+        return redirect()->route('admin.dish.index')->with('success', 'Блюдо успешно создано');
       }
 
       return back()->withInput()->with('error', 'Не удолось создать nps');
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $np
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $np)
+    public function show($id)
     {
         //
     }
@@ -83,41 +83,39 @@ class NpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  Images $np
+     * @param  int  Dish $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Images $np)
+    public function edit(Dish $dish)
     {
-
-    //  dd(Images::find($id));
-    //dd($np);
-
-    return view('admin.user.edit',[
-        'npsLis' => $np
-    ]);
-
+        return view('admin.dish.edit',[
+          'dishList' => $dish
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  Images $np
+     * @param  int  Dish $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Images $np)
+    public function update(Request $request, Dish $dish)
     {
 
-//dd($np);
-
+//dd($dish);
       $validated = $request->validate([
-        'product_name' => ['required', 'string'],
+        'name' => ['required', 'string'],
+        'ingredient_two' => ['required', 'string'],
+        'ingredient_three' => ['required', 'string'],
         'exp' => ['required', 'string'],
         'total_time' => ['required', 'string'],
-      //  'description' => ['required', 'string'],
+
       ]);
 
-      $data = $request->only(['product_name', 'total_time', 'exp', 'description', 'image_url']);
+      $data = $request->only(['id', 'name', 'ingredient_one', 'amount_one', 'ingredient_two',
+      'amount_two', 'ingredient_three', 'amount_three',
+      'ingredient_four', 'ingredient_five', 'amount_five', 'ingredient_six', 'amount_six', 'exp', 'total_time']);
 
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
@@ -126,13 +124,13 @@ class NpsController extends Controller
       );
       }
 
-      $np = $np->fill($validated)->save();
+      $dish = $dish->fill($validated)->save();
 
-      if($np){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно отредактирован');
+      if($dish){
+        return redirect()->route('admin.dish.index')->with('success', 'блюдо успешно отредактирован');
       }
 
-      return back()->withInput()->with('error', 'Не удолось отредактировать nps');
+      return back()->withInput()->with('error', 'Не удолось отредактировать');
     }
 
     /**

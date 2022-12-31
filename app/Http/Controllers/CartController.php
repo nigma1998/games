@@ -12,30 +12,47 @@ use App\Models\Users;
 use App\Models\Images;
 use App\Models\Schablon;
 use App\Helper\TimeHelper;
+use App\Helper\TaimHelper;
 
 class CartController extends Controller
 {
+
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cart $gem)
+    public function index()
     {
 
-
+    $user = Auth::user()->name;
+    $userList =  Cart::where('user', $user)->get();
 
       // данные взяты с файла хелпер
       $TimeHelper = new TimeHelper();
       $minut = TimeHelper::SECONDS_PER_MINUTE;
       $hour = TimeHelper::SECONDS_PER_HOUR;
       $day = TimeHelper::SECONDS_PER_DAY;
+
+
+
       $schablon = Schablon::select(Schablon::$yonListt)->get(); // файл для шаблона
       $lvl = Level::select(Level::$fileTaibl)->get();
 
-      $user = Auth::user()->name;
+      $TaimHelper = new TaimHelper();
 
-      $userList =  DB::table('cart')->where('user', $user)->get();
+
         return view('gem.cart', [
           'laf' => $userList,
           'has' => $schablon,
@@ -43,6 +60,7 @@ class CartController extends Controller
           'hour' => $hour,
           'day' => $day,
           'lvl' => $lvl,
+          'prob' => $TaimHelper,
         ]);
 
 
@@ -135,7 +153,10 @@ class CartController extends Controller
       $gem = $gem->fill($request->only(['product_name', 'total_time', 'exp', 'image_url', 'dat', 'button']))->save();
 
 
+      $TimeHelper = new TaimHelper();
 
+      $TimeHelper->peremennaj = request()->input('total_time');
+      $TimeHelper->updated_at = date("Y-m-d H:i:s");
 
       // прибавление опыта игроку
       $ex = Auth::user()->exp; // общее количество опыта у игрока

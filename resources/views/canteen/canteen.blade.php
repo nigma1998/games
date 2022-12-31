@@ -8,7 +8,7 @@
 @include('inc.message')
     <div>
         <img width="16" height="16" src="/Themes/images/refresh.png"/>
-        <a href="{{ route('gem.gem.index') }}">Обновить</a>
+        <a href="{{ route('canteen.canteen.index') }}">Обновить</a>
         <a href="{{ url('home') }}">Домой</a>
     </div>
 
@@ -21,8 +21,12 @@
               <td> <img class="icon" width="48" height="48" src="{{ Storage::url($userlist->image_url)}}"/> </td>
           <div class="row">
               <div>
-                      <span class="patienttitle">{{ $userlist->product_name }}</span>
+
+                      <div class="spravca"> <input type="checkbox" id="{{ $userlist->id }}" class="reference"/>
+                    <label for="{{ $userlist->id }}" ><span class="patienttitle"><span class="patienttitle"><span class="patienttitle">{{ $userlist->product_name }}</span></span></span></label>
+
 <span class="minor smallfont">
+
 
 @php
 // реализация самого таймера
@@ -79,7 +83,33 @@ $secondsRemaining -= ($minutesRemaining * $minut);     //обновляем пе
      @else
 
      @endif
-   </span>                    </div>
+   </span>
+   <span class="story">
+     <div class="explain smallfont" style="padding:4px;">
+     <ul>
+         <li class="padbottom_s">
+             <img width="16" height="16" src="/Themes/images/info.png"/>
+             <span class="ylwtitle">Список ингридиентов</span>
+         </li>
+
+             <li style='margin-left:20px;'>
+                 <span class="">{{ $userlist->amount_one }}x {{ $userlist->ingredient_one }}: </span><span>Добавить в блюдо</span> через <span class='ylwtitle'>6 ч. 20 мин.</span>
+             </li>
+
+             <li style='margin-left:20px;'>
+                 <span class="">29x Щипцы: </span><span>Использовать</span> через <span class='ylwtitle'>13 ч. 33 мин.</span>
+             </li>
+
+             <li style='margin-left:20px;'>
+                 <span class="">1x Пакет для головы: </span><span>Использовать</span> через <span class='ylwtitle'>20 ч. 47 мин.</span>
+             </li>
+
+     </ul>
+     </div>
+   </span>
+   </div>
+  </div>
+
                  <div>
 
 @php
@@ -144,8 +174,8 @@ $ir = date("Y", strtotime($userlist->dat));
 
   @else
 </div>
-    <a href="{{ route('gem.taim.edit', ['taim' => $userlist->id]) }}">Быстрый допрос</a></br>
-    <a href="{{ route('gem.proba.edit', ['proba'=> $userlist->id]) }}">Личный допрос</a>
+    <a href="{{ route('gem.taim.edit', ['taim' => $userlist->id]) }}">Добавить ингридиент</a></br>
+
 
 
 
@@ -155,7 +185,35 @@ $ir = date("Y", strtotime($userlist->dat));
 @else
 
 </br>
-    <a href="{{ route('gem.nonesk.edit', ['nonesk'=> $userlist->id]) }}">Завершить допрос</a>
+
+    <form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $userlist->id]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
+    @csrf
+    @method('put')
+
+    <div class="form-group">
+
+    <input type="hidden" class="form-control" name="product_name" id="product_name" value="">
+    </div>
+    <div class="form-group">
+
+    <input type="hidden" class="form-control" name="total_time" id="total_time" value="">
+    </div>
+    <div class="form-group">
+
+    <input type="hidden" class="form-control" name="exp" id="exp" value="{{ Auth::user()->personal_experience }}">
+    </div>
+    <div class="form-group">
+    <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
+    </div>
+    <div class="form-group">
+
+    <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
+    </div>
+
+    <button class="btn btn-primary">Завершить блюдо</button>
+
+
+  </form>
 @endif
 <!--здесь должно отображаться таймер до следующего сокращение времени-->
               </div>
@@ -180,7 +238,7 @@ $ir = date("Y", strtotime($userlist->dat));
                     <div>
 
     <img width="16" height="16" src="/Themes/images/diagnosis.png"/>
-<a href="{{ route('gem.gem.edit', ['gem'=> $userlist->id]) }}">Принять подозреваемого</a>
+<a href="{{ route('canteen.canteen.edit', ['canteen'=> $userlist->id]) }}">Начать готовку</a>
                     </div>
                 </div>
                 <div style="clear: both"></div>

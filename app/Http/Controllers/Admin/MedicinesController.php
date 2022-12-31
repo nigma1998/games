@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Images;
+use App\Models\Delivery;
 use App\Services\UploadedService;
 
-class NpsController extends Controller
+class MedicinesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,12 @@ class NpsController extends Controller
      */
     public function index()
     {
-
-        $npsList = Images::select(Images::$allowedFields)->get();
-      //    dd($npsList);
-        return view('admin.user.nps',
-        ['npsList' => $npsList,
-
-      ]
-      );
+      $medicomentList = Delivery::select(Delivery::$allowedFields)->get();
+    //    dd($npsList);
+      return view('admin.medicoment.medicoment',
+      ['medicomentList' => $medicomentList,
+    ]
+    );
     }
 
     /**
@@ -33,8 +31,7 @@ class NpsController extends Controller
      */
     public function create()
     {
-      return view('admin.user.create');
-
+        return view('admin.medicoment.create');
     }
 
     /**
@@ -45,7 +42,6 @@ class NpsController extends Controller
      */
     public function store(Request $request)
     {
-//dd($request);
       $validated = $request->validate([
         'product_name' => ['required', 'string']
       ]);
@@ -57,25 +53,24 @@ class NpsController extends Controller
       );
       }
 
-      $data = $request->only(['product_name', 'total_time', 'exp', 'image_url']);
-      $npsList = Images::create($data);
+      $data = $request->only(['image_url', 'total_time', 'exp', 'product_name', 'income',  'amount', 'price']);
+      $npsList = Delivery::create($data);
 
 
       if($npsList){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно создан');
+        return redirect()->route('admin.medicoment.index')->with('success', 'Медикомент успешно создан');
       }
 
-      return back()->withInput()->with('error', 'Не удолось создать nps');
-
+      return back()->withInput()->with('error', 'Не удолось создать Медикомент');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $np
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $np)
+    public function show($id)
     {
         //
     }
@@ -83,37 +78,30 @@ class NpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  Images $np
+     * @param  int  Delivery $medicine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Images $np)
+    public function edit(Delivery $medicine)
     {
-
-    //  dd(Images::find($id));
-    //dd($np);
-
-    return view('admin.user.edit',[
-        'npsLis' => $np
-    ]);
-
+      return view('admin.medicoment.edit',[
+          'medicine' => $medicine
+      ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  Images $np
+     * @param  int  Delivery $medicine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Images $np)
+    public function update(Request $request, Delivery $medicine)
     {
-
-//dd($np);
-
       $validated = $request->validate([
         'product_name' => ['required', 'string'],
         'exp' => ['required', 'string'],
         'total_time' => ['required', 'string'],
+        'income' => ['required', 'string'],
       //  'description' => ['required', 'string'],
       ]);
 
@@ -126,13 +114,13 @@ class NpsController extends Controller
       );
       }
 
-      $np = $np->fill($validated)->save();
+      $medicine = $medicine->fill($validated)->save();
 
-      if($np){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно отредактирован');
+      if($medicine){
+        return redirect()->route('admin.medicines.index')->with('success', 'Медикомент успешно отредактирован');
       }
 
-      return back()->withInput()->with('error', 'Не удолось отредактировать nps');
+      return back()->withInput()->with('error', 'Не удолось создать nps');
     }
 
     /**
