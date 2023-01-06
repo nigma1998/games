@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>Весёлый надзиратель</title>
+<head><title>Светила медецины</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, user-scalable=no" />
 <link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad.png" />
@@ -15,7 +15,7 @@
     <div>
 
 <div class="caption">
-    <h1>Весёлый надзиратель</h1>
+    <h1>Светила Медецины</h1>
 </div>
 <div class="content">
 
@@ -25,21 +25,21 @@
         <img class="screen" width="128" height="128" src="/Themes/Images/screens/operationRoom.jpg">
     </div>
     <div class="smallfont">
-        <h3>Задерживай не простых преступников!</h3>
+        <h3>Лечи самые сложные заболевания!</h3>
         <div class="img_thumb">
             <img class="icon" width="48" height="48" src="/Themes/images/patients/patient45.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/patients/patient5.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/patients/patient7.png"/>
             <div style="clear: both"></div>
         </div>
-        <h3>Проводи самстоятельные допросы!</h3>
+        <h3>Делай для себя новые открытия!</h3>
         <div class="img_thumb">
             <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine3.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine20.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine48.png"/>
             <div style="clear: both"></div>
         </div>
-        <h3>Управляй автопарком скорой помощи!</h3>
+        <h3>Управляй своими организациями которые ты сможешь открыть в будущем!</h3>
         <div class="img_thumb">
             <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/Hummer-H-2.png"/>
             <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/StarTrans-Senator.png"/>
@@ -54,10 +54,10 @@
             <div style="clear: both"></div>
         </div>
     </div>
-    <span class="main-header smallfont">Интерны</span> <span class="whitefont smallfont">- это увлекательная многопользовательская онлайн-игра в больницу.</span>
+    <span class="main-header smallfont">Светила медецины</span> <span class="whitefont smallfont">- это одна из самы крупных и серьёзных организации человечества.</span>
     <br />
     <span class="whitefont smallfont">
-    Стань доктором, дай клятву Гиппократа, и окунись в интересный мир.
+    Стань професионалом докажи человечеству что ты достоин этого титула и готов преодолеть самые невозможные трудности.
     </span>
     <div class="sbtn smallfont" style="width: 220px;">
         <a class="btn center" href="/Main/StartGame?r=0"><img width="16" height="16" alt="o" src="/Themes/images/enter2.png"> Начать карьеру доктора</a>

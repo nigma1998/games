@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Весёлый надзиратель</title>
+    <title>Светила медецины</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

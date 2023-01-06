@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Level;
+use App\Models\Pharmaceuticals;
 use App\Models\Users;
 use App\Models\Images;
 use App\Models\Schablon;
@@ -13,7 +14,8 @@ use App\Helper\TaimHelper;
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>Камера</title>
+<head><title>Пульт управления</title>
+
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, user-scalable=no" />
 <link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad.png" />
@@ -27,7 +29,7 @@ use App\Helper\TaimHelper;
     <div>
 
 <div class="caption">
-    <h1>Камера</h1>
+    <h1>пульт управления</h1>
 </div>
 <div class="content">
   @yield('content')
@@ -36,17 +38,23 @@ use App\Helper\TaimHelper;
       <div style="width:11%;">
       </div>
   </div>
+  @php
+$user = Auth::user()->name;
+$amout = DB::table('cart')->where('user', $user)->count();
+$pharmaceuticals = DB::table('lab')->where('user', $user)->count();
+
+  @endphp
     <div class="block">
         <ul class="action_list">
             <li>
                 <img width="16" height="16" alt="o" src="{{ asset('storage/images/car.jpg') }}">
                     <a href="{{ route('gem.gem.index') }}">Камера</a>
-                    <span class="ylwtitle">(18)</span>
+                    <span class="ylwtitle">(@php  echo  $amout @endphp)</span>
             </li>
             <li>
                 <img width="16" height="16" alt="o" src="{{ asset('storage/images/ico.jpg') }}">
                     <a href="{{ route('pharmaceuticals.pharmaceuticals.index') }}">Формацефтика</a>
-                    <span class="ylwtitle">(12)</span>
+                    <span class="ylwtitle">(@php  echo  $pharmaceuticals @endphp)</span>
             </li>
         <!--    <li>
                 <img width="16" height="16" alt="o" src="{{ asset('storage/images/ico.jpg') }}">
@@ -86,7 +94,7 @@ use App\Helper\TaimHelper;
                 <img width="16" height="16" alt="o" src="/Themes/images/cabinet-icon.png">
                     <a href="/Cabinet?t=637958294648690268">Кабинет</a>
             </li>
-            
+
             <li>
                 <img width="16" height="16" alt="o" src="/Themes/images/folder.png">
                     <a href="/Forum">Форум</a>

@@ -57,6 +57,54 @@
                         <label for="description">Описание</label>
                         <input type="text" class="form-control" name="description" id="description" value="{{ $npsLis->description }}">
                         </div>
+                        <div class="form-group">
+                        <label for="drug_one">Мндикамент 1</label>
+                        <input type="text" class="form-control" name="drug_one" id="drug_one" value="{{ $npsLis->drug_one }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_one">Количество 1</label>
+                        <input type="text" class="form-control" name="amount_one" id="amount_one" value="{{ $npsLis->amount_one }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="drug_two">Мндикамент 2</label>
+                        <input type="text" class="form-control" name="drug_two" id="drug_two" value="{{ $npsLis->drug_two }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_two">Количество 2</label>
+                        <input type="text" class="form-control" name="amount_two" id="amount_two" value="{{ $npsLis->amount_two }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="drug_three">Мндикамент 3</label>
+                        <input type="text" class="form-control" name="drug_three" id="drug_three" value="{{ $npsLis->drug_three }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_three">Количество 3</label>
+                        <input type="text" class="form-control" name="amount_three" id="amount_three" value="{{ $npsLis->amount_three }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="drug_four">Мндикамент 4</label>
+                        <input type="text" class="form-control" name="drug_four" id="drug_four" value="{{ $npsLis->drug_four }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_four">Количество 4</label>
+                        <input type="text" class="form-control" name="amount_four" id="amount_four" value="{{ $npsLis->amount_four }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="drug_five">Мндикамент 5</label>
+                        <input type="text" class="form-control" name="drug_five" id="drug_five" value="{{ $npsLis->drug_five }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_five">Количество 5</label>
+                        <input type="text" class="form-control" name="amount_five" id="amount_five" value="{{ $npsLis->amount_five }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="drug_six">Мндикамент 6</label>
+                        <input type="text" class="form-control" name="drug_six" id="drug_six" value="{{ $npsLis->drug_six }}">
+                        </div>
+                        <div class="form-group">
+                        <label for="amount_six">Количество 6</label>
+                        <input type="text" class="form-control" name="amount_six" id="amount_six" value="{{ $npsLis->amount_six }}">
+                        </div>
 
 
                         <button class="btn btn-primary">Сохранить</button>

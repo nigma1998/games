@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Images;
+use App\Http\Requests\NpsUpdateRequest;
+use App\Http\Requests\NpsStoreRequest;
 use App\Services\UploadedService;
 
 class NpsController extends Controller
@@ -40,25 +42,20 @@ class NpsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NpsStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NpsStoreRequest $request)
     {
-//dd($request);
-      $validated = $request->validate([
-        'product_name' => ['required', 'string']
-      ]);
 
+      $validated = $request->validated();
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
       $validated['image_url'] = $uploadedService->fileUpload(
         $request->file('image_url')
       );
       }
-
-      $data = $request->only(['product_name', 'total_time', 'exp', 'image_url']);
-      $npsList = Images::create($data);
+      $npsList = Images::create($validated);
 
 
       if($npsList){
@@ -101,24 +98,13 @@ class NpsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NpsUpdateRequest  $request
      * @param  int  Images $np
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Images $np)
+    public function update(NpsUpdateRequest $request, Images $np)
     {
-
-//dd($np);
-
-      $validated = $request->validate([
-        'product_name' => ['required', 'string'],
-        'exp' => ['required', 'string'],
-        'total_time' => ['required', 'string'],
-      //  'description' => ['required', 'string'],
-      ]);
-
-      $data = $request->only(['product_name', 'total_time', 'exp', 'description', 'image_url']);
-
+      $validated = $request->validated();
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
       $validated['image_url'] = $uploadedService->fileUpload(

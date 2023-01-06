@@ -1,11 +1,15 @@
 body {
-    background-color: #5a6479; /*434344*/
+    /*background-color: #5a6479; /*434344*/
+
+
+    background-image: url('../storage/images/fon.jpg');
     max-width: 640px;
     font-family: Tahoma,Arial,sans-serif;
     margin: 0 auto;
     color: #000;
     font-size: medium;
 }
+
 
 table {
     border-collapse: collapse;
@@ -504,11 +508,11 @@ h1 a {
 }
 
     h1 a:hover {
-        color: #FB9B5A;
+        color: #FF0000;
     }
 
 a {
-    color: #004687;
+    color: #FF0000;
     font-weight: bold;
 }
 
@@ -658,7 +662,8 @@ div.block {
     }
 
 div.content {
-    background-color: #E3CEF6;
+background-color: #A9E2F3;
+
 }
 
 .notify {

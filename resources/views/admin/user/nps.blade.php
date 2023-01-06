@@ -12,11 +12,12 @@
           <thead>
             <tr>
               <th scope="col">id</th>
-              <th scope="col">Имя</th>
+              <th scope="col">Название болезни</th>
               <th scope="col">Картинка</th>
               <th scope="col">время</th>
               <th scope="col">опыт</th>
               <th scope="col">описание</th>
+              <th scope="col">медикоменты</th>
               <th scope="col">Управление</th>
             </tr>
           </thead>
@@ -31,6 +32,19 @@
               <td>{{$npsLis->total_time}}</td>
               <td>{{$npsLis->exp}}</td>
               <td>{{$npsLis->description}}</td>
+              <td>{{$npsLis->drug_one}}
+                {{$npsLis->amount_one}}<br>
+                {{$npsLis->drug_two}}
+                {{$npsLis->amount_two}}<br>
+                {{$npsLis->drug_three}}
+                {{$npsLis->amount_three}}<br>
+                {{$npsLis->drug_four}}
+                {{$npsLis->amount_four}}<br>
+                {{$npsLis->drug_five}}
+                {{$npsLis->amount_five}}<br>
+                {{$npsLis->drug_six}}
+                {{$npsLis->amount_six}}<br>
+              </td>
               <td> <a href="{{ route('admin.nps.edit', ['np'=> $npsLis->id]) }}">редактирование</a></td>
             </tr>
 @empty

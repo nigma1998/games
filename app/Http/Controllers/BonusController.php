@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bonus;
 use App\Models\Pharmaceuticals;
+use App\Http\Requests\PharmaceuticalsUpdateRequest;
 use App\Models\Level;
 use App\Models\Users;
 use App\Models\Medezine;
@@ -72,11 +73,11 @@ class BonusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PharmaceuticalsUpdateRequest  $request
      * @param  int  Pharmaceuticals $bonu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pharmaceuticals $bonu)
+    public function update(PharmaceuticalsUpdateRequest $request, Pharmaceuticals $bonu)
     {
     //  dd($bonu->product_name);
 
@@ -98,16 +99,9 @@ class BonusController extends Controller
   }
 
 
-      $bonu->dat = $timestamp = date("Y-m-d H:i:s");
-      $bonu->image_url;
-      //dd($pharmaceutical->image_url);
-      $bonu->product_name = request()->input('product_name');
-      $bonu->total_time = request()->input('total_time');
-      $bonu->income = request()->input('income');
-      $bonu->amount = request()->input('amount');
-      $bonu->exp = request()->input('exp');
-      $bonu->price = request()->input('price');
-      $bonu->save();
+  $validated = $request->validated();
+
+   $bonu = $bonu->fill($validated)->save();
 
       // прибавление опыта игроку
       $ex = Auth::user()->exp; // общее количество опыта у игрока

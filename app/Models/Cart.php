@@ -12,7 +12,10 @@ class Cart extends Model
 
 
 
-    public static array $allowedFields = ['id', 'image_url', 'total_time', 'exp', 'product_name', 'updated_at', 'user', 'dat', 'button', 'identifier', 'chat_nps' ];
+    public static array $allowedFields = ['id', 'image_url', 'total_time', 'exp', 'product_name',
+    'updated_at', 'user', 'dat', 'button', 'identifier', 'chat_nps',
+    'drug_one', 'amount_one', 'drug_two', 'amount_two', 'drug_three', 'amount_three', 'drug_four', 'amount_four',
+    'drug_five', 'amount_five', 'drug_six', 'amount_six'];
 
     public static  array $yonListt = ['updated_at'];
 
@@ -20,5 +23,7 @@ class Cart extends Model
 
     protected $fillable = [
       'user', 'product_name', 'total_time', 'exp', 'image_url', 'dat', 'button', 'identifier', 'chat_nps', 'updated_at',
+      'drug_one', 'amount_one', 'drug_two', 'amount_two', 'drug_three', 'amount_three', 'drug_four', 'amount_four',
+      'drug_five', 'amount_five', 'drug_six', 'amount_six'
     ];
 }

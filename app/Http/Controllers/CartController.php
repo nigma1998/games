@@ -11,6 +11,7 @@ use App\Models\Level;
 use App\Models\Users;
 use App\Models\Images;
 use App\Models\Schablon;
+use App\Http\Requests\CartUpdateRequest;
 use App\Helper\TimeHelper;
 use App\Helper\TaimHelper;
 
@@ -45,7 +46,7 @@ class CartController extends Controller
       $hour = TimeHelper::SECONDS_PER_HOUR;
       $day = TimeHelper::SECONDS_PER_DAY;
 
-
+      $amout = DB::table('cart')->count();
 
       $schablon = Schablon::select(Schablon::$yonListt)->get(); // файл для шаблона
       $lvl = Level::select(Level::$fileTaibl)->get();
@@ -134,23 +135,19 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CartUpdateRequest  $request
      * @param  int  Cart $gem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $gem)
+    public function update(CartUpdateRequest $request, Cart $gem)
     {
+    //  dd($validated = $request->validated());
       $lvls = Auth::user()->lvl;
       $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
 
 
-
-      $request->validate([
-        'product_name' => ['required', 'string']
-      ]);
-
       $gem->dat = $timestamp = date("Y-m-d H:i:s");
-      $gem = $gem->fill($request->only(['product_name', 'total_time', 'exp', 'image_url', 'dat', 'button']))->save();
+      $gem = $gem->fill($validated = $request->validated())->save();
 
 
       $TimeHelper = new TaimHelper();

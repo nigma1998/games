@@ -47,7 +47,11 @@
 <!-- здесь вывод перечень  с последующим его записи в бд-->
     </li>
 
+    @php
 
+    $date = date("Y-m-d H:i:s");
+
+    @endphp
     <div class="form-group">
 
     <input type="hidden" class="form-control" name="product_name" id="product_name" value="{{ $deliveryList->product_name }}">
@@ -80,6 +84,10 @@
     <div class="form-group">
 
     <input type="hidden" class="form-control" name="amount" id="amount" value="{{ $deliveryList->amount }}">
+    </div>
+    <div class="form-group">
+
+    <input type="hidden" class="form-control" name="dat" id="dat" value="{{$date}}">
     </div>
 
 

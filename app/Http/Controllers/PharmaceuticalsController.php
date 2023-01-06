@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Users;
 use App\Models\Schablon;
+use App\Http\Requests\PharmaceuticalsUpdateRequest;
 use App\Models\Cart;
 use App\Models\Bonus;
 use App\Models\Delivery;
@@ -134,41 +135,18 @@ class PharmaceuticalsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PharmaceuticalsUpdateRequest  $request
      * @param  int  Pharmaceuticals $pharmaceutical
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pharmaceuticals $pharmaceutical)
+    public function update(PharmaceuticalsUpdateRequest $request, Pharmaceuticals $pharmaceutical)
     {
       $lvls = Auth::user()->lvl;
       $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
 
-    //  dd($pharmaceutical);
+      $validated = $request->validated();
 
-  //    $request->validate([
-      //  'product_name' => ['required', 'string'],
-      //  'total_time' => ['required', 'string'],
-      //  'image_url' => ['required', 'string'],
-
-
-      //]);
-
-
-
-      $pharmaceutical->dat = $timestamp = date("Y-m-d H:i:s");
-      $pharmaceutical->image_url = request()->input('image_url');
-      //dd($pharmaceutical->image_url);
-      $pharmaceutical->product_name = request()->input('product_name');
-      $pharmaceutical->total_time = request()->input('total_time');
-      $pharmaceutical->income = request()->input('income');
-      $pharmaceutical->amount = request()->input('amount');
-      $pharmaceutical->exp = request()->input('exp');
-      $pharmaceutical->price = request()->input('price');
-      $pharmaceutical->save();
-
-    //  $pharmaceutical = $pharmaceutical->fill($request->only(['product_name', 'total_time', 'exp', 'image_url', 'price' ]))->save();
-
-
+       $pharmaceutical = $pharmaceutical->fill($validated)->save();
       //вычитаем монеты за ее доставку
       $coins = Auth::user()->coins; // общее количество монет у игрока
       $pric = request()->input('price');

@@ -150,7 +150,7 @@ $ir = date("Y", strtotime($lafLis->dat));
   $ref -= ($minutes * $minut);     //обновляем переменную
 @endphp
   @if ($days > -1)
-  <div class='blog'>До следующего опроса
+  <div class='blog'>До следующего приёма
     @if($days > 0)
     {{$days}} д,
     @else
@@ -179,8 +179,32 @@ $ir = date("Y", strtotime($lafLis->dat));
 
   @else
 </div>
-    <a href="{{ route('gem.taim.edit', ['taim' => $lafLis->id]) }}">Быстрый допрос</a></br>
-    <a href="{{ route('gem.proba.edit', ['proba'=> $lafLis->id]) }}">Личный допрос</a>
+<form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+
+@php
+// здесь реализуеться сокращение таймера
+$daysRemaining * 24; // преобразовываем день в час
+$hoursRemaining;
+$plus = $daysRemaining + $hoursRemaining * 60;
+$minutesRemaining;
+$peremenaj = $plus + $minutesRemaining ;
+
+$tare = 500; // условное значени позже будет переписанно на значение из бд
+
+$arrr = $peremenaj - $tare; // вычитаем из общего время нужную сумму
+$aq = $arrr; // результат присваиваем этой переменной и вносим в бд
+$date = date("Y-m-d H:i:s");
+
+@endphp
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="total_time" id="total_time" value="{{$aq}}">
+  <input type="hidden" class="form-control" name="dat" id="dat" value="{{$date}}">
+  </div>
+  <button class="btn btn-primary">Сократить время</button>
+</form>
+
 
 
 
@@ -190,15 +214,21 @@ $ir = date("Y", strtotime($lafLis->dat));
 @else
 
 </br>
+@php
 
+$date = date("Y-m-d H:i:s");
+
+@endphp
 
       <form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()" enctype="multipart/form-data">
       @csrf
       @method('put')
 
       <div class="form-group">
-
       <input type="hidden" class="form-control" name="product_name" id="product_name" value="">
+      </div>
+      <div class="form-group">
+      <input type="hidden" class="form-control" name="image_url" id="image_url" value="">
       </div>
       <div class="form-group">
 
@@ -212,11 +242,13 @@ $ir = date("Y", strtotime($lafLis->dat));
       <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
       </div>
       <div class="form-group">
-
       <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
       </div>
+      <div class="form-group">
+      <input type="hidden" class="form-control" name="dat" id="dat" value="{{$date}}">
+      </div>
 
-      <button class="btn btn-primary">Отправить на этап</button>
+      <button class="btn btn-primary">Выписать пациента</button>
 
 
     </form>
@@ -236,7 +268,7 @@ $ir = date("Y", strtotime($lafLis->dat));
 
 
             <li class="padtop_s first-li">
-                    <img class="icon_l" width="48" height="48" src="{{ Storage::url($lafL->url)}}">
+                    <img class="icon_l" width="48" height="48" src="{{ asset('storage/images/fonn.jpg') }}">
                 <div class="row">
                     <div>
                             <span class="patienttitle">Свободная палата</span>
@@ -244,7 +276,7 @@ $ir = date("Y", strtotime($lafLis->dat));
                     <div>
 
     <img width="16" height="16" src="/Themes/images/diagnosis.png"/>
-<a href="{{ route('gem.gem.edit', ['gem'=> $lafLis->id]) }}">Принять подозреваемого</a>
+<a href="{{ route('gem.gem.edit', ['gem'=> $lafLis->id]) }}">Принять пациента</a>
                     </div>
                 </div>
                 <div style="clear: both"></div>
@@ -262,7 +294,7 @@ $ir = date("Y", strtotime($lafLis->dat));
             <li class="padtop_m">
 
 <div>
-    <img class="icon" width="48" height="48" src="{{ Storage::url($lafL->url)}}"/>
+    <img class="icon" width="48" height="48" src="{{ asset('storage/images/fonn.jpg') }}"/>
     <span class="drugtitle">Новая палата</span>
     <div>
                 <img width="16" height="16" src="/Themes/images/cart.png"/>
@@ -282,7 +314,7 @@ $ir = date("Y", strtotime($lafLis->dat));
     <ul class="padtop_m">
         <li>
             <img width="16" height="16" src="/Themes/images/pill.png"/>
-            <a href="/Rooms/ChangeCurrentVitamin?t=637958294648680268&page=1">Выбрать Обед для подозреваемого</a>:
+            <a href="/Rooms/ChangeCurrentVitamin?t=637958294648680268&page=1">Выбрать Обед для больного</a>:
                 <div style="margin-left:21px">
                     Живительный напиток
                 </div>

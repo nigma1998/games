@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Images;
+use App\Http\Requests\CartUpdateRequest;
 use App\Models\Level;
 use App\Models\Users;
 
@@ -72,20 +73,23 @@ class NpsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CartUpdateRequest  $request
      * @param  Cart $nonesk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $nonesk)
+    public function update(CartUpdateRequest $request, Cart $nonesk)
     {
+
+  //    dd($validated = $request->validated());
+     $validated = $request->validated();
+
+      $nonesk = $nonesk->fill($validated)->save();
+
+
       $lvls = Auth::user()->lvl;
       $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
       // здесь реализована очищение таблицы игрока
-      $request->validate([
 
-      ]);
-
-      $nonesk = $nonesk->fill($request->only(['product_name', 'total_time', 'exxp', 'image_url', 'identifier', 'chat_nps']))->save();
 
     //  dd($gem);
 
