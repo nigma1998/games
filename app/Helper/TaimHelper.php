@@ -70,14 +70,17 @@ echo $this->peremennaj;
 
         if($hou > 0){
       echo  $hou;
-      echo "часов";
+      echo " час ";
       }
-        else{}
+        else{
+          $hou = 0;
+          echo $hou;
+        }
 
 
         if($minu > 0){
       echo   $minu;
-      echo "минут";
+      echo " минут";
        }
          else{}
 
@@ -137,14 +140,14 @@ echo $this->peremennaj;
 
         if($hou > 0){
       echo  $hou;
-      echo "часов";
+      echo " час ";
       }
         else{}
 
 
         if($minu > 0){
       echo   $minu;
-      echo "минут";
+      echo " минут";
        }
          else{}
 

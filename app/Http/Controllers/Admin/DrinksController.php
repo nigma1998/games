@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Images;
-use App\Http\Requests\NpsUpdateRequest;
-use App\Http\Requests\NpsStoreRequest;
+use App\Models\Drinks;
 use App\Services\UploadedService;
+use App\Http\Requests\DrinksUpdateRequest;
+use App\Http\Requests\DrinksStoreRequest;
 
-class NpsController extends Controller
+class DrinksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,13 @@ class NpsController extends Controller
      */
     public function index()
     {
+      $drinkList = Drinks::select(Drinks::$allowedFields)->get();
+    //    dd($npsList);
+      return view('admin.drink.drink',
+      ['drinkList' => $drinkList,
 
-        $npsList = Images::select(Images::$allowedFields)->get();
-      //    dd($npsList);
-        return view('admin.user.nps',
-        ['npsList' => $npsList,
-
-      ]
-      );
+    ]
+    );
     }
 
     /**
@@ -35,19 +34,17 @@ class NpsController extends Controller
      */
     public function create()
     {
-      return view('admin.user.create');
-
+        return view('admin.drink.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  NpsStoreRequest  $request
+     * @param  DrinksStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NpsStoreRequest $request)
+    public function store(DrinksStoreRequest $request)
     {
-
       $validated = $request->validated();
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
@@ -55,24 +52,23 @@ class NpsController extends Controller
         $request->file('image_url')
       );
       }
-      $npsList = Images::create($validated);
+      $drinkList = Drinks::create($validated);
 
 
-      if($npsList){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно создан');
+      if($drinkList){
+        return redirect()->route('admin.drinks.index')->with('success', 'продукт успешно создан');
       }
 
-      return back()->withInput()->with('error', 'Не удолось создать nps');
-
+      return back()->withInput()->with('error', 'Не удолось создать продукт');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $np
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $np)
+    public function show($id)
     {
         //
     }
@@ -80,29 +76,27 @@ class NpsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  Images $np
+     * @param  int  Drinks $drink
      * @return \Illuminate\Http\Response
      */
-    public function edit(Images $np)
+    public function edit(Drinks $drink)
     {
-
-
-    return view('admin.user.edit',[
-        'npsLis' => $np
-    ]);
-
+      return view('admin.drink.edit',[
+          'drink' => $drink
+      ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  NpsUpdateRequest  $request
-     * @param  int  Images $np
+     * @param  DrinksUpdateRequest  $request
+     * @param  int  Drinks $drink
      * @return \Illuminate\Http\Response
      */
-    public function update(NpsUpdateRequest $request, Images $np)
+    public function update(DrinksUpdateRequest $request, Drinks $drink)
     {
       $validated = $request->validated();
+    //  dd($validated = $request->validated());
       if($request->hasFile('image_url')){
       $uploadedService = app(UploadedService::class);
       $validated['image_url'] = $uploadedService->fileUpload(
@@ -110,13 +104,13 @@ class NpsController extends Controller
       );
       }
 
-      $np = $np->fill($validated)->save();
+      $drink = $drink->fill($validated)->save();
 
-      if($np){
-        return redirect()->route('admin.nps.index')->with('success', 'nps успешно отредактирован');
+      if($drink){
+        return redirect()->route('admin.drinks.index')->with('success', 'продукт успешно отредактирован');
       }
 
-      return back()->withInput()->with('error', 'Не удолось отредактировать nps');
+      return back()->withInput()->with('error', 'Не удолось отредактировать продукт');
     }
 
     /**

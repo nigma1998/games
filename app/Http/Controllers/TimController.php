@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
+use App\Models\Users;
+use App\Models\Drinks;
+use App\Http\Requests\DrinksUpdateRequest;
 
 class TimController extends Controller
 {
@@ -14,7 +19,10 @@ class TimController extends Controller
      */
     public function index()
     {
-        //
+      $drinks = Drinks::select(Drinks::$allowedFields)->get();
+        return view('gem.tim',[
+            'drinks' => $drinks,
+        ]);
     }
 
     /**
@@ -65,28 +73,22 @@ class TimController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DrinksUpdateRequest  $request
      * @param  int  Cart $taim
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $taim)
+    public function update(DrinksUpdateRequest $request, Cart $taim)
     {
-      // здесь реализация таймера
-      $request->validate([
 
-      ]);
-
-      $taim->dat = $timestamp = date("Y-m-d H:i:s");
-
-      $taim = $taim->fill($request->only([ 'total_time', 'dat']))->save();
-
-    //  dd($gem);
+      $user = Users::findOrFail(Auth::user()->id);
+      $user->drink = request()->input('drinks');
+      $user->save();
 
       if($taim){
-        return redirect()->route('gem.gem.index')->with('success', 'время сокращено');
+        return redirect()->route('gem.gem.index')->with('success', 'Напиток выбран');
       }
 
-      return back()->withInput()->with('error', 'Заключённый сбежал');
+      return back()->withInput()->with('error', 'Неудалось выбрать напиток');
     }
 
     /**

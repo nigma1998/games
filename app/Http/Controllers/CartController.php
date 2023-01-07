@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Cart;
 use App\Models\Level;
 use App\Models\Users;
+use App\Models\Drinks;
 use App\Models\Images;
 use App\Models\Schablon;
 use App\Http\Requests\CartUpdateRequest;
@@ -38,7 +39,10 @@ class CartController extends Controller
     {
 
     $user = Auth::user()->name;
+    $drinks = Auth::user()->drink;
     $userList =  Cart::where('user', $user)->get();
+
+    $drinkList =  Drinks::where('id', $drinks)->get();
 
       // данные взяты с файла хелпер
       $TimeHelper = new TimeHelper();
@@ -62,6 +66,7 @@ class CartController extends Controller
           'day' => $day,
           'lvl' => $lvl,
           'prob' => $TaimHelper,
+          'drinkList' => $drinkList,
         ]);
 
 

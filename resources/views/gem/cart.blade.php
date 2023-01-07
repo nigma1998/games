@@ -74,6 +74,66 @@ $e = date("d", strtotime($lafLis->updated_at));// переменная день
 $i = date("Y", strtotime($lafLis->updated_at));// переменная год
 
 $endOfDiscount = mktime($x,$r,$s,$m,$e,$i);
+@endphp
+@switch($lafLis->identifier)
+@case(1)
+
+<form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="identifier" id="identifier" value="2">
+  </div>
+  <button class="btn btn-primary">Выслушать жалобу</button>
+</form>
+
+@break
+@case(2)
+
+<form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="identifier" id="identifier" value="3">
+  </div>
+  <button class="btn btn-primary">Произвести осмотр</button>
+</form>
+
+
+@break
+@case(3)
+
+<form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="identifier" id="identifier" value="4">
+  </div>
+  <button class="btn btn-primary">Назначить курс лечения</button>
+</form>
+
+
+@break
+@case(4)
+@if(Auth::user()->drink <= 0)
+<a href="{{ route('gem.taim.index', ['button'=> $lafLis->id]) }}">Выбрать еду</a>
+@else
+<form  method="post" action="{{ route('gem.nonesk.update', ['nonesk'=> $lafLis->id]) }}" onchange="this.form.submit()"  enctype="multipart/form-data">
+  @csrf
+  @method('put')
+  <div class="form-group">
+  <input type="hidden" class="form-control" name="identifier" id="identifier" value="5">
+  </div>
+  <button class="btn btn-primary">Напоить пациента</button>
+</form>
+
+
+@endif
+
+
+@break
+ @default(5)
+ @php
 $now = time(); // текущее время
 $secondsRemaining = $endOfDiscount - $now; // оставшееся время
 
@@ -191,7 +251,7 @@ $plus = $daysRemaining + $hoursRemaining * 60;
 $minutesRemaining;
 $peremenaj = $plus + $minutesRemaining ;
 
-$tare = 500; // условное значени позже будет переписанно на значение из бд
+$tare = 5; // условное значени позже будет переписанно на значение из бд
 
 $arrr = $peremenaj - $tare; // вычитаем из общего время нужную сумму
 $aq = $arrr; // результат присваиваем этой переменной и вносим в бд
@@ -202,13 +262,12 @@ $date = date("Y-m-d H:i:s");
   <input type="hidden" class="form-control" name="total_time" id="total_time" value="{{$aq}}">
   <input type="hidden" class="form-control" name="dat" id="dat" value="{{$date}}">
   </div>
-  <button class="btn btn-primary">Сократить время</button>
+  <button class="btn btn-primary">Осмотр</button>
 </form>
 
 
-
-
 @endif
+
 
 
 @else
@@ -238,11 +297,9 @@ $date = date("Y-m-d H:i:s");
 
       <input type="hidden" class="form-control" name="exp" id="exp" value="{{ Auth::user()->personal_experience }}">
       </div>
+
       <div class="form-group">
-      <input type="hidden" class="form-control" name="chat_nps" id="chat_nps" value="">
-      </div>
-      <div class="form-group">
-      <input type="hidden" class="form-control" name="identifier" id="identifier" value="">
+      <input type="hidden" class="form-control" name="identifier" id="identifier" value="1">
       </div>
       <div class="form-group">
       <input type="hidden" class="form-control" name="dat" id="dat" value="{{$date}}">
@@ -253,6 +310,9 @@ $date = date("Y-m-d H:i:s");
 
     </form>
 @endif
+@break
+@endswitch
+
 <!--здесь должно отображаться таймер до следующего сокращение времени-->
               </div>
           </div>
@@ -314,7 +374,7 @@ $date = date("Y-m-d H:i:s");
     <ul class="padtop_m">
         <li>
             <img width="16" height="16" src="/Themes/images/pill.png"/>
-            <a href="/Rooms/ChangeCurrentVitamin?t=637958294648680268&page=1">Выбрать Обед для больного</a>:
+            <a href="{{ route('gem.taim.index') }}">Выбрать Обед для больного</a>:
                 <div style="margin-left:21px">
                     Живительный напиток
                 </div>

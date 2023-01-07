@@ -13,7 +13,7 @@ class Cart extends Model
 
 
     public static array $allowedFields = ['id', 'image_url', 'total_time', 'exp', 'product_name',
-    'updated_at', 'user', 'dat', 'button', 'identifier', 'chat_nps',
+    'updated_at', 'user', 'dat', 'button', 'identifier',
     'drug_one', 'amount_one', 'drug_two', 'amount_two', 'drug_three', 'amount_three', 'drug_four', 'amount_four',
     'drug_five', 'amount_five', 'drug_six', 'amount_six'];
 

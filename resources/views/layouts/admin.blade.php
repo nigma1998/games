@@ -89,7 +89,8 @@
                                 <li><a title="продукт" href="{{ route('admin.product.index') }}"><i class="fa fa-bullseye sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Продукты</span></a></li>
                                 <li><a title="Игроки" href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Игроки</span></a></li>
                                 <li><a title="формацефтика" href="{{ route('admin.medicines.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Медикоменты</span></a></li>
-                                <li><a title="формацефтика" href="{{ route('admin.bonus.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Бонусы для фармоцефтики</span></a></li>
+                                <li><a title="формацефтика" href="{{ route('admin.bonus.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Бонусы для </span></a></li>
+                                <li><a title="палата" href="{{ route('admin.drinks.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Напитки </span></a></li>
                                   <li><a title="кухня" href="{{ route('admin.dish.index') }}"><i class="fa fa-circle-o sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">кухня</span></a></li>
                                 <li><a title="Клан" href="index-2.html"><i class="fa fa-cube sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Клан</span></a></li>
                                 <li><a title="Шаблон" href="{{ route('admin.schablon.index') }}"><i class="fa fa-cube sub-icon-mg" aria-hidden="true"></i> <span class="mini-sub-pro">Шаблон</span></a></li>
