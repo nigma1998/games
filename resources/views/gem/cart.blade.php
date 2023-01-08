@@ -251,7 +251,7 @@ $plus = $daysRemaining + $hoursRemaining * 60;
 $minutesRemaining;
 $peremenaj = $plus + $minutesRemaining ;
 
-$tare = 5; // условное значени позже будет переписанно на значение из бд
+$tare = 50; // условное значени позже будет переписанно на значение из бд
 
 $arrr = $peremenaj - $tare; // вычитаем из общего время нужную сумму
 $aq = $arrr; // результат присваиваем этой переменной и вносим в бд

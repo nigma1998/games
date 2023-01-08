@@ -58,7 +58,7 @@ class CartController extends Controller
       $TaimHelper = new TaimHelper();
 
 
-        return view('gem.cart', [
+        return view('gem.cart', [ 
           'laf' => $userList,
           'has' => $schablon,
           'minut' => $minut,
