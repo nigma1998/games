@@ -147,8 +147,10 @@ echo $this->peremennaj;
       echo " минут";
        }
          else{
+          //проверка на наличия нуля
           $minu = 0;
           echo $minu;
+
          }
 
 }
