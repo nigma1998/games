@@ -47,12 +47,12 @@ $pharmaceuticals = DB::table('lab')->where('user', $user)->count();
     <div class="block">
         <ul class="action_list">
             <li>
-                <img width="16" height="16" alt="o" src="{{ asset('storage/images/car.jpg') }}">
-                    <a href="{{ route('gem.gem.index') }}">Камера</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="{{ route('gem.gem.index') }}">палата</a>
                     <span class="ylwtitle">(@php  echo  $amout @endphp)</span>
             </li>
             <li>
-                <img width="16" height="16" alt="o" src="{{ asset('storage/images/ico.jpg') }}">
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
                     <a href="{{ route('pharmaceuticals.pharmaceuticals.index') }}">Формацефтика</a>
                     <span class="ylwtitle">(@php  echo  $pharmaceuticals @endphp)</span>
             </li>
@@ -61,72 +61,86 @@ $pharmaceuticals = DB::table('lab')->where('user', $user)->count();
                     <a href="{{ route('canteen.canteen.index') }}">Столовая</a>
                     <span class="ylwtitle">(12)</span>
             </li>
-                <li>
-                    <img width="16" height="16" alt="o" src="{{ asset('storage/images/ogorod.jpg') }}">
-                    <a href="/AutoPark?t=637958294648680268">Огород</a>
-                        <span class="ylwtitle">(26)</span>
-                </li>
+                <ul>
+ 
                 <li>
                     <img width="16" height="16" alt="o" src="{{ asset('storage/images/carzr.png') }}">
                         <a href="/Quests?t=637958294648680268">Карцр</a>
 <span class="ylwtitle">(*)</span>                </li>-->
+
                 <li>
-                    <img width="16" height="16" alt="o" src="{{ asset('storage/images/name.png') }}">
+                    <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
                         <a href="/VetClinic?t=637958294648680268">Автопарк</a>
                         <span class="ylwtitle">(5)</span>
                 </li>
 
-                <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/misc/cup-3.png">
-                    <a href="/Competitions?t=637958294648690268">Соревнования</a>
-                        <span class="ylwtitle">(*)</span>
+<br>
+                <li>Психиатрическая клиника
+                    <ol>
+                        <li><!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                            <a href="">Спец палата</a>
+                            <span class="ylwtitle">(в разработке)</span></li>
+                        <li><!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                            <a href="">Изолятор</a>
+                            <span class="ylwtitle">(в разработке)</span></li>
+                        <li><!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                            <a href="">Вызов</a>
+                            <span class="ylwtitle">(в разработке)</span></li>
+                    </ol>
                 </li>
+
+<br>
+
+                
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/warehouse.png">
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
                     <a href="{{ route('stock.stock.index') }}">Склад</a>
             </li>
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/cart.png">
-                <a href="/Purchases?t=637958294648690268">Магазин</a>
+               <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                <a href="">Магазин</a>
             </li>
             <li>
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/cabinet-icon.png">
-                    <a href="/Cabinet?t=637958294648690268">Кабинет</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="">Кабинет</a>
             </li>
 
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/folder.png">
-                    <a href="/Forum">Форум</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="">Форум</a>
 <span class="ylwtitle">(*)</span>            </li>
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/chat.png">
-                    <a href="/Chat">Чат</a>
+               <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="">Чат</a>
 <span class="ylwtitle">(*)</span>            </li>
             <li class="padtop_m">
-                <img width="16" height="16" alt="o" src="/Themes/images/book-open.png">
-                <a class="ylwtext" href="/Forum/Messages?topicId=974b7ae6-ea2f-47f0-9d0f-15747ac6d96b">Справка по игре</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                <a class="ylwtext" href="">Справка по игре</a>
             </li>
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/email.png">
-                    <a href="/Email?mode=All">Почта</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="">Почта</a>
             </li>
+           
             <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/People.png">
-                    <a href="/Friends">Друзья</a>
-            </li>
-            <li>
-                <img width="16" height="16" alt="o" src="/Themes/images/fruit-apple-half.png">
-                    <a href="/Profile">Профиль</a>
+                <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                    <a href="">Профиль</a>
 <span class="ylwtext">(+)</span>            </li>
+               @if (Auth::user()->klan > 0)
+                   
+              
                 <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/union.png">
-                        <a href="/Union?unionId=604a0805-075f-4338-821d-dfd570d655a1">Союз</a>
-<span class="ylwtitle">(*)</span>                </li>
+                    <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                        <a href="">Союз</a>
+<span class="ylwtitle">(в разработке)</span>                </li>
                 <li>
-                    <img width="16" height="16" alt="o" src="/Themes/images/chat.png">
-                        <a href="/UnionHQ?unionId=604a0805-075f-4338-821d-dfd570d655a1">Ординаторская</a>
-<span class="ylwtitle">(*)</span>                </li>
+                    <!--<img width="16" height="16" alt="o" src="{{ asset('storage/images/palata.png') }}">-->
+                        <a href="">Ординаторская</a>
+<span class="ylwtitle">(в разработке)</span>                </li>
+@else
+
+@endif
         </ul>
     </div>
 </div>
@@ -165,3 +179,4 @@ $lv = Level::select(Level::$fileyon)->where('lvl', $lvls)->value('exp_to_lvl');
 
 </body>
 </html>
+

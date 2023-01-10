@@ -27,10 +27,11 @@
                             @csrf
                         </form>
                     </div>
-
+                    @if (Auth::user()->role > 0)  
+                    
                     админка
                     <a href="{{ route('admin.nps.index') }}">Админ понель</a></br>
-
+                    @endif
                     <a href="{{ route('gem.gem.index') }}">Перейти на аккаунт</a>
                 </div>
             </div>

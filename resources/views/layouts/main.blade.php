@@ -22,35 +22,35 @@
 <div class="block">
 <div class="padtop_s">
     <div style="padding-bottom: 4px">
-        <img class="screen" width="128" height="128" src="/Themes/Images/screens/operationRoom.jpg">
+        <img class="screen" width="128" height="128" src="{{ asset('storage/images/fonn.jpg') }}">
     </div>
     <div class="smallfont">
         <h3>Лечи самые сложные заболевания!</h3>
         <div class="img_thumb">
-            <img class="icon" width="48" height="48" src="/Themes/images/patients/patient45.png"/>
+            <!--<img class="icon" width="48" height="48" src="/Themes/images/patients/patient45.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/patients/patient5.png"/>
-            <img class="icon" width="48" height="48" src="/Themes/images/patients/patient7.png"/>
+            <img class="icon" width="48" height="48" src="/Themes/images/patients/patient7.png"/>-->
             <div style="clear: both"></div>
         </div>
         <h3>Делай для себя новые открытия!</h3>
         <div class="img_thumb">
-            <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine3.png"/>
+           <!-- <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine3.png"/>
             <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine20.png"/>
-            <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine48.png"/>
+            <img class="icon" width="48" height="48" src="/Themes/images/medicines/medicine48.png"/>-->
             <div style="clear: both"></div>
         </div>
         <h3>Управляй своими организациями которые ты сможешь открыть в будущем!</h3>
         <div class="img_thumb">
-            <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/Hummer-H-2.png"/>
+           <!-- <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/Hummer-H-2.png"/>
             <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/StarTrans-Senator.png"/>
-            <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/Mercedes-e200.png"/>
+            <img class="icon" width="90" height="60" src="/Themes/images/AutoCars/Mercedes-e200.png"/>-->
             <div style="clear: both"></div>
         </div>
-        <h3>Общайся, получай, и дари подарки!</h3>
+        <h3>Достигни самых больших высот</h3>
         <div class="img_thumb">
-            <img class="icon" width="96" height="96" src="/Themes/images/presents/premium/syringe.png"/>
+            <!--<img class="icon" width="96" height="96" src="/Themes/images/presents/premium/syringe.png"/>
             <img class="icon" width="96" height="96" src="/Themes/images/presents/premium/ice.png"/>
-            <img class="icon" width="96" height="96" src="/Themes/images/presents/premium/ferrari.png"/>
+            <img class="icon" width="96" height="96" src="/Themes/images/presents/premium/ferrari.png"/>-->
             <div style="clear: both"></div>
         </div>
     </div>
@@ -59,9 +59,7 @@
     <span class="whitefont smallfont">
     Стань професионалом докажи человечеству что ты достоин этого титула и готов преодолеть самые невозможные трудности.
     </span>
-    <div class="sbtn smallfont" style="width: 220px;">
-        <a class="btn center" href="/Main/StartGame?r=0"><img width="16" height="16" alt="o" src="/Themes/images/enter2.png"> Начать карьеру доктора</a>
-    </div>
+   
     <ul>
       @if (Route::has('login'))
           <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -78,9 +76,7 @@
       @endif
     </ul>
 </div>
-<div class="padtop_m ylwtext">
-Онлайн: <span class="ylwtitle">1314</span>, <span>регистраций: 6909061</span>
-</div>
+
 </div>
 
 </div>
